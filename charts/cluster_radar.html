@@ -19,7 +19,10 @@ Highcharts.chart('container', {
 
   chart: {
     polar: true,
-    type: 'line'
+    type: 'line',
+    width: 200,
+    height: 300,
+    margin: 0
   },
 
   accessibility: {
@@ -62,8 +65,9 @@ Highcharts.chart('container', {
 
   legend: {
     align: 'right',
-    verticalAlign: 'middle',
-    layout: 'vertical'
+    verticalAlign: 'bottom',
+    layout: 'horizontal',
+    y: 30
   },
 
   series: [{
@@ -91,7 +95,7 @@ Highcharts.chart('container', {
   responsive: {
     rules: [{
       condition: {
-        maxHeight: 1200
+        maxHeight: '80px'
       },
       chartOptions: {
         legend: {
@@ -100,7 +104,7 @@ Highcharts.chart('container', {
           layout: 'horizontal'
         },
         pane: {
-          size: '90%'
+          size: '50%'
         }
       }
     }]
@@ -112,10 +116,10 @@ Highcharts.chart('container', {
 <!--styling starts here-->
 <style>
 .highcharts-figure, .highcharts-data-table table {
-    min-width: 320px;
-    max-width: 1200px;
-    min-height: 500px;
-    height:auto;
+    min-width: 200px;
+    max-width: 200px;
+    min-height: 200px;
+    height:200px;
 
 }
 
@@ -125,8 +129,8 @@ Highcharts.chart('container', {
 	border: 1px solid #EBEBEB;
 	margin: 10px auto;
 	text-align: center;
-	width: 100%;
-	max-width: 500px;
+	width: 200px;
+	max-width: 200px;
 }
 .highcharts-data-table caption {
     padding: 1em 0;
