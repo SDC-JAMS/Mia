@@ -20,21 +20,26 @@ Highcharts.chart('container', {
         type: 'scatter',
         zoomType: 'xy'
     },
+    
     title: {
         text: 'Scatter Plot of Average Airbnb Price against Median House Price (£)'
     },
+    
     subtitle: {
         text: 'Source: Inside Airbnb 2020, London Datastore 2015'
     },
+    
     xAxis: {
         title: {
             enabled: true,
             text: 'Median House Price (£)'
         },
+        
         startOnTick: true,
         endOnTick: true,
         showLastLabel: true
     },
+    
     yAxis: {
         title: {
             text: 'Average Airbnb Price per Night (£)'
