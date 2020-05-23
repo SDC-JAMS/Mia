@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<figure class="highcharts-figure">
+    <div id="container"></div>
+    <p class="highcharts-description">
+        This scatter chart shows a clear positive relationship between average airbnb price and median house price of London boroughs, with each point representing an observation or borough. We are therefore interested to find out whether statistically significant relationships can be found with other socio-economic and demographic characteristics of London's neighbourhoods, such as age structure, median household income 
+    </p>
+</figure>
+
+<!--javascript starts here-->
+<script>
+Highcharts.chart('container', {
+    chart: {
+        type: 'scatter',
+        zoomType: 'xy'
+    },
+    title: {
+        text: 'Scatter Plot of Average Airbnb Price against Median House Price (£)'
+    },
+    subtitle: {
+        text: 'Source: Inside Airbnb 2020, London Datastore 2015'
+    },
+    xAxis: {
+        title: {
+            enabled: true,
+            text: 'Median House Price (£)'
+        },
+        startOnTick: true,
+        endOnTick: true,
+        showLastLabel: true
+    },
+    yAxis: {
+        title: {
+            text: 'Average Airbnb Price per Night (£)'
+        }
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'left',
+        verticalAlign: 'top',
+        x: 100,
+        y: 70,
+        floating: true,
+        backgroundColor: Highcharts.defaultOptions.chart.backgroundColor,
+        borderWidth: 1
+    },
+    plotOptions: {
+        scatter: {
+            marker: {
+                radius: 5,
+                states: {
+                    hover: {
+                        enabled: true,
+                        lineColor: 'rgb(100,100,100)'
+                    }
+                }
+            },
+            states: {
+                hover: {
+                    marker: {
+                        enabled: false
+                    }
+                }
+            },
+            tooltip: {
+                headerFormat: '<b>Median House Price, Avg Airbnb Price</b><br>',
+                pointFormat: '£ {point.x} , £ {point.y}'
+            }
+        }
+    },
+    series: [{
+        name: 'Borough',
+        color: 'rgba(223, 83, 83, .5)',
+        data: [[799999,188.3782772], [243500,61.34375], [445000,84.5751938], [275000, 60.85576923,], [407250,92.52967626],
+            [374975,64.62867647], [700000,150.9032864], [300000,62.0744186], [430000,86.07692308], [320000,67.63843648],
+            [340000,97.00382653], [485000,102.940167], [730000,145.9130219], [432500,86.69088812], [396150,84.15816327],
+            [287500,64.421875], [350000,70.62536023], [355000,94.1], [583000,120.6610338,], [1200000,210.6858438],
+            [410000,83.70703125], [450000,105.1070764], [352000, 68.16819222], [415000, 95.75247525], [305000, 82.95421436],
+            [345000, 71.40514469], [575000,120.232518], [475000,122.6552655], [320000,52.43382353], [415000,95.43444125],
+            [366569,66.66148532], [557000,120.1130536], [920000,220.5099338]]
+    }]
+});
+
+</script>
+
+<!--styling starts here -->
+<style>
+.highcharts-figure, .highcharts-data-table table {
+    min-width: 360px; 
+    max-width: 800px;
+    margin: 1em auto;
+}
+
+.highcharts-data-table table {
+	font-family: Verdana, sans-serif;
+	border-collapse: collapse;
+	border: 1px solid #EBEBEB;
+	margin: 10px auto;
+	text-align: center;
+	width: 100%;
+	max-width: 500px;
+}
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+.highcharts-data-table th {
+	font-weight: 600;
+    padding: 0.5em;
+}
+.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+    padding: 0.5em;
+}
+.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}
+
+</style>
+

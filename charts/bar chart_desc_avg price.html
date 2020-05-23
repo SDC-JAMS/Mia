@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--source code from https://code.tutsplus.com/tutorials/getting-started-with-chartjs-line-and-bar-charts--cms-28384-->
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+
+<canvas id="bar-chart-horizontal" width="400" height="100"></canvas>
+
+<script>
+new Chart(document.getElementById("bar-chart-horizontal"), {
+    type: 'horizontalBar',
+    data: {
+      labels: ["Westminster", "Kensington and Chelsea", "City of London", "Camden", "Hammersmith","Southwark","Islington","Richmond upon Thames","Wandsworth","Lambeth"],
+      datasets: [
+        {
+          label: "Total Listings",
+          backgroundColor: [
+              'rgba(0, 99, 132, 0.6)',
+              'rgba(30, 99, 132, 0.6)',
+              'rgba(60, 99, 132, 0.6)',
+              'rgba(90, 99, 132, 0.6)',
+              'rgba(120, 99, 132, 0.6)',
+              'rgba(150, 99, 132, 0.6)',
+              'rgba(180, 99, 132, 0.6)',
+              'rgba(210, 99, 132, 0.6)',
+              'rgba(240, 99, 132, 0.6)',
+              'rgba(270, 99, 132, 0.6)'
+  ],
+          borderColor:[
+              'rgba(0, 99, 132, 1)',
+              'rgba(30, 99, 132, 1)',
+              'rgba(60, 99, 132, 1)',
+              'rgba(90, 99, 132, 1)',
+              'rgba(120, 99, 132, 1)',
+              'rgba(150, 99, 132, 1)',
+              'rgba(180, 99, 132, 1)',
+              'rgba(210, 99, 132, 1)',
+              'rgba(240, 99, 132, 1)',
+              'rgba(270, 99, 132, 1)'
+  ],
+          borderWidth:2,
+          hoverBorderWidth: 3,
+          data: [220.5099338, 210.6858438, 188.3782772, 150.9032864, 145.9130219, 122.6552655, 120.6610338, 120.2325175, 120.1130536, 105.1070764],
+          barThickness:6,
+          maxBarThickness:8,
+          barPercentage:2,
+        }
+      ]
+    },
+    options: {
+      legend: { display: true },
+      title: {
+        display: true,
+        text: 'Top 10 London Neighbourhoods with Highest Price per Night (£) on Average'
+      },
+      animation:{
+        duration: 2000
+      },
+        offset:false
+          
+      }
+    
+});
+
+</script>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script type="text/javascript" src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<title>subjectivity</title>
+</head>
+<body>
+<div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+<pre id="csv" style="display:none">
+Barking and Dagenham,0.535148,0.328883383
+Barnet,0.572839,0.396719609
+Bexley,0.583904,0.401186812
+Brent,0.547286,0.392669102
+Bromley,0.572573,0.365666914
+Camden,0.549833,0.349542907
+City of London,0.546295,0.332814486
+Croydon,0.573287,0.339476827
+Ealing,0.581019,0.30339079
+Enfield,0.574783,0.343728398
+Greenwich,0.584275,0.386741248
+Hackney,0.573689,0.406207822
+Hammersmith and Fulham,0.561129,0.397926559
+Haringey,0.571536,0.391974127
+Harrow,0.59361,0.331454582
+Havering,0.601599,0.320776285
+Hillingdon,0.603105,0.37760898
+Hounslow,0.602971,0.383923291
+Islington,0.552325,0.359652135
+Kensington and Chelsea,0.563991,0.404127909
+Kingston upon Thames,0.599069,0.382158683
+Lambeth,0.546333,0.379716008
+Lewisham,0.554793,0.363587314
+Merton,0.598595,0.383242647
+Newham,0.55708,0.344601368
+Redbridge,0.569936,0.323412812
+Richmond upon Thames,0.616911,0.406421796
+Southwark,0.545336,0.371063149
+Sutton,0.600419,0.417241899
+Tower Hamlets,0.546642,0.394392768
+Waltham Forest,0.560178,0.396195599
+Wandsworth,0.574043,0.389922313
+Westminster,0.54074,0.372829161
+</pre>
+<script language="JavaScript">
+$(function() {
+  Highcharts.chart('container', {
+    chart: {
+      backgroundColor: 'transparent',
+      type: 'scatter',
+      zoomType: 'xy'
+    },
+    title: {
+      text: 'Subjectivity: Guest V.S. Host'
+    },
+
+    xAxis: {
+      title: {
+        enabled: true,
+        text: 'Mean Subjectivity of Guests'
+      },
+      startOnTick: true,
+      endOnTick: true,
+      showLastLabel: true
+    },
+    yAxis: {
+      title: {
+        text: 'Mean Subjectivity of Hosts'
+
+      }
+    },
+    legend: {
+      layout: 'vertical',
+      align: 'left',
+      verticalAlign: 'top',
+      x: 1000,
+      y: 70,
+      floating: true,
+      backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || 'white',
+	  borderColor: '#CCC',
+      borderWidth: 1,
+	  shadow: false
+    },
+    plotOptions: {
+      scatter: {
+        marker: {
+          radius: 4,
+          states: {
+            hover: {
+              enabled: true,
+              lineColor: 'rgb(100,100,100)'
+            }
+          }
+        },
+        states: {
+          hover: {
+            marker: {
+              enabled: false
+            }
+          }
+        },
+        tooltip: {
+          headerFormat: '<b>{point.key}</b><br>',
+          pointFormat: 'Guest : {point.x} <br> Host : {point.y}'
+        }
+      }
+    },
+	credits:{
+      enabled: false
+    },
+    data: {
+      firstRowAsNames: false,
+      csv: document.getElementById('csv').innerHTML,
+      seriesMapping: [{
+        name: 0,
+        x: 1,
+        y: 2
+      }]
+    },
+  });
+});
+</script>
+</body>
+</html>

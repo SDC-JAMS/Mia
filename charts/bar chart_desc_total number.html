@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--source code from https://code.tutsplus.com/tutorials/getting-started-with-chartjs-line-and-bar-charts--cms-28384-->
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+
+<canvas id="bar-chart-horizontal" width="800" height="250"></canvas>
+
+<script>
+new Chart(document.getElementById("bar-chart-horizontal"), {
+    type: 'horizontalBar',
+    data: {
+      labels: ["Westminster", "Tower Hamlets", "Camden", "Kensington and Chelsea", "Southwark","Hackney","Lambeth","Hammersmith","Islington"],
+      datasets: [
+        {
+          label: "Total Listings",
+          backgroundColor: [
+              'rgba(0, 99, 132, 0.6)',
+              'rgba(30, 99, 132, 0.6)',
+              'rgba(60, 99, 132, 0.6)',
+              'rgba(90, 99, 132, 0.6)',
+              'rgba(120, 99, 132, 0.6)',
+              'rgba(150, 99, 132, 0.6)',
+              'rgba(180, 99, 132, 0.6)',
+              'rgba(210, 99, 132, 0.6)',
+              'rgba(240, 99, 132, 0.6)',
+              'rgba(270, 99, 132, 0.6)'
+  ],
+          borderColor:[
+              'rgba(0, 99, 132, 1)',
+              'rgba(30, 99, 132, 1)',
+              'rgba(60, 99, 132, 1)',
+              'rgba(90, 99, 132, 1)',
+              'rgba(120, 99, 132, 1)',
+              'rgba(150, 99, 132, 1)',
+              'rgba(180, 99, 132, 1)',
+              'rgba(210, 99, 132, 1)',
+              'rgba(240, 99, 132, 1)',
+              'rgba(270, 99, 132, 1)'
+  ],
+          borderWidth:2,
+          hoverBorderWidth: 3,
+          data: [5134,3821, 3195, 2868, 2222, 2156, 2148, 2012, 2012],
+          barThickness:6,
+          maxBarThickness:8,
+          barPercentage:2,
+        }
+      ]
+    },
+    options: {
+      legend: { display: true },
+      title: {
+        display: true,
+        text: 'Top 10 London Neighbourhoods with Highest Number of Listings'
+      },
+      animation:{
+        duration: 2000
+      },
+      scales:{
+          xAxes:[{
+              ticks:{
+                  beginAtZero: true
+              },
+          offset:false
+          }]
+      }
+    }
+});
+
+</script>

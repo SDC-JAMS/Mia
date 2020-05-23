@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<figure class="highcharts-figure">
+    <div id="container"></div>
+   <!-- <p class="highcharts-description">
+        Using K-means clustering, we assigned each of the 33 London boroughs to a cluster based on their price, overall rating and review scores. We derived 5 clusters, and display their detailed review scores here.
+    </p>-->
+</figure>
+
+<!--javascript starts here-->
+<script>
+Highcharts.chart('container', {
+
+  chart: {
+    polar: true,
+    type: 'line'
+  },
+
+  accessibility: {
+    description: 'A spiderweb chart compares the review scores for each cluster. Each spoke represents one of the 7 aspects of reviews: accuracy. The chart is interactive, and each data point is displayed upon hovering.'
+  },
+
+  title: {
+    text: '',
+    x: -80
+  },
+
+    navigation:{
+        buttonOptions: {
+            enabled: false
+        }
+    },
+
+  pane: {
+    size: '100%'
+  },
+
+  xAxis: {
+    categories: ['Accuracy', 'Cleanliness', 'Check-in', 'Communication',
+      'Location', 'Value'
+    ],
+    tickmarkPlacement: 'on',
+    lineWidth: 0
+  },
+
+  yAxis: {
+    gridLineInterpolation: 'polygon',
+    lineWidth: 0,
+    min: 8
+  },
+
+  tooltip: {
+    shared: true,
+    pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.3f}</b><br/>'
+  },
+
+  legend: {
+    align: 'right',
+    verticalAlign: 'middle',
+    layout: 'vertical'
+  },
+
+  series: [{
+    name: 'Cluster 0',
+    data: [9.6088501, 9.380047924, 9.700962125, 9.719377172, 9.57336735, 9.372499392],
+    pointPlacement: 'on'
+  }, {
+    name: 'Cluster 1',
+    data: [9.516925722, 9.307858196, 9.689209702, 9.688178072, 9.334118662, 9.379821171],
+    pointPlacement: 'on'
+  }, {
+    name: 'Cluster 2',
+    data: [9.337575009, 9.172129145, 9.513003976, 9.512622539, 9.749269672, 9.031979104],
+    pointPlacement: 'on'
+  }, {
+    name: 'Cluster 3',
+    data: [9.546511392, 9.322335344, 9.675791557, 9.701116336, 9.442060069, 9.359148499],
+    pointPlacement: 'on'
+  }, {
+    name: 'Cluster 4',
+    data: [9.392528975, 9.17516789, 9.519072488, 9.501974634, 9.65313832, 9.100060212],
+    pointPlacement: 'on'
+  }],
+
+  responsive: {
+    rules: [{
+      condition: {
+        maxHeight: 1200
+      },
+      chartOptions: {
+        legend: {
+          align: 'center',
+          verticalAlign: 'bottom',
+          layout: 'horizontal'
+        },
+        pane: {
+          size: '90%'
+        }
+      }
+    }]
+  }
+
+});
+</script>
+
+<!--styling starts here-->
+<style>
+.highcharts-figure, .highcharts-data-table table {
+    min-width: 320px;
+    max-width: 1200px;
+    min-height: 500px;
+    height:auto;
+
+}
+
+.highcharts-data-table table {
+	font-family: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	border-collapse: collapse;
+	border: 1px solid #EBEBEB;
+	margin: 10px auto;
+	text-align: center;
+	width: 100%;
+	max-width: 500px;
+}
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.1em;
+    color: #555;
+}
+.highcharts-data-table th {
+	font-weight: 600;
+    padding: 0.5em;
+}
+.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+    padding: 0.5em;
+    font-family: Verdana, sans-serif;
+}
+.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}
+
+</style>

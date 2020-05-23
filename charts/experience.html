@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script type="text/javascript" src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<title>experience</title>
+</head>
+<body>
+<div id="container"</div>
+#container {
+	min-width: 320px;
+	max-width: 800px;
+	margin: 0 auto;
+}
+<script language="JavaScript">
+Highcharts.chart('container', {
+    chart: {
+        type: 'packedbubble',
+        height: '100%'
+    },
+	credits:{
+      enabled: false
+    },
+    title: {
+        text: 'Review Counts by Experience Types'
+    },
+    tooltip: {
+        useHTML: true,
+        pointFormat: '<b>{point.name}:</b> {point.y}</sub>'
+    },
+    plotOptions: {
+        packedbubble: {
+            minSize: '5%',
+            maxSize: '60%',
+            zMin: 0,
+            zMax: 1000,
+            layoutAlgorithm: {
+                gravitationalConstant: 0.05,
+                splitSeries: true,
+                seriesInteraction: false,
+                dragBetweenSeries: true,
+                parentNodeLimit: true
+            },
+            dataLabels: {
+                enabled: true,
+                format: '{point.name}',
+                filter: {
+                    property: 'y',
+                    operator: '>',
+                    value: 250
+                },
+                style: {
+                    color: 'black',
+                    textOutline: 'none',
+                    fontWeight: 'normal'
+                }
+            }
+        }
+    },
+    series: [{
+        name: 'None',
+        data: [{
+            name: 'Barking and Dagenham',
+            value: 1206
+        }, {
+            name: 'Barnet',
+            value: 12272
+        },
+        {
+            name: "Bexley",
+            value: 1077
+        },
+        {
+            name: "Brent",
+            value: 31559
+        },
+        {
+            name: "Bromley",
+            value: 5018
+        },
+        {
+            name: "Camden",
+            value: 81555
+        },
+        {
+            name: "City of London",
+            value: 5960
+        },
+        {
+            name: "Croydon",
+            value: 6940
+        },
+        {
+            name: "Ealing",
+            value: 22930
+        },
+        {
+            name: "Enfield",
+            value: 4945
+        },
+        {
+            name: "Greenwich",
+            value: 15821
+        }, {
+            name: "Hackney",
+            value: 56742
+        }, {
+            name: "Hammersmith and Fulham",
+            value: 47502
+        },
+        {
+            name: "Haringey",
+            value: 22730
+        },
+        {
+            name: "Harrow",
+            value: 4076
+        },
+        {
+            name: "Havering",
+            value: 1179
+        },
+        {
+            name: "Hillingdon",
+            value: 8311
+        },
+        {
+            name: "Hounslow",
+            value: 11968
+        },
+        {
+            name: "Islington",
+            value: 61190
+        },
+        {
+            name: "Kensington and Chelsea",
+            value: 66126
+        },
+        {
+            name: "Kingston upon Thames",
+            value: 4937
+        },
+        {
+            name: "Lambeth",
+            value: 76615
+        },
+        {
+            name: "Lewisham",
+            value: 21469
+        },
+        {
+            name: "Merton",
+            value: 9395
+        },
+        {
+            name: "Newham",
+            value: 20607
+        },
+        {
+            name: "Redbridge",
+            value: 5832
+        },
+        {
+            name: "Richmond upon Thames",
+            value: 16513
+        },
+        {
+            name: "Southwark",
+            value: 67007
+        },
+        {
+            name: "Sutton",
+            value: 3013
+        },
+        {
+            name: "Tower Hamlets",
+            value: 92710
+        },
+        {
+            name: "Waltham Forest",
+            value: 9960
+        },
+        {
+            name: "Wandsworth",
+            value: 39978
+        },
+        {
+            name: "Westminster",
+            value: 113085
+        }]
+    }, {
+        name: 'Business',
+         data: [{
+            name: 'Barking and Dagenham',
+            value: 2
+        }, {
+            name: 'Barnet',
+            value: 399
+        },
+        {
+            name: "Bexley",
+            value: 94
+        },
+        {
+            name: "Brent",
+            value: 305
+        },
+        {
+            name: "Bromley",
+            value: 37
+        },
+        {
+            name: "Camden",
+            value: 2429
+        },
+        {
+            name: "City of London",
+            value: 667
+        },
+        {
+            name: "Croydon",
+            value: 30
+        },
+        {
+            name: "Ealing",
+            value: 99
+        },
+        {
+            name: "Enfield",
+            value: 285
+        },
+        {
+            name: "Greenwich",
+            value: 567
+        }, {
+            name: "Hackney",
+            value: 3393
+        }, {
+            name: "Hammersmith and Fulham",
+            value: 4091
+        },
+        {
+            name: "Haringey",
+            value: 810
+        },
+        {
+            name: "Harrow",
+            value: 176
+        },
+        {
+            name: "Havering",
+            value: 0
+        },
+        {
+            name: "Hillingdon",
+            value: 93
+        },
+        {
+            name: "Hounslow",
+            value: 711
+        },
+        {
+            name: "Islington",
+            value: 2801
+        },
+        {
+            name: "Kensington and Chelsea",
+            value: 2260
+        },
+        {
+            name: "Kingston upon Thames",
+            value: 291
+        },
+        {
+            name: "Lambeth",
+            value: 2998
+        },
+        {
+            name: "Lewisham",
+            value: 742
+        },
+        {
+            name: "Merton",
+            value: 143
+        },
+        {
+            name: "Newham",
+            value: 230
+        },
+        {
+            name: "Redbridge",
+            value: 71
+        },
+        {
+            name: "Richmond upon Thames",
+            value: 586
+        },
+        {
+            name: "Southwark",
+            value: 1691
+        },
+        {
+            name: "Sutton",
+            value: 174
+        },
+        {
+            name: "Tower Hamlets",
+            value: 4160
+        },
+        {
+            name: "Waltham Forest",
+            value: 933
+        },
+        {
+            name: "Wandsworth",
+            value: 1580
+        },
+        {
+            name: "Westminster",
+            value: 3461
+        }]
+    },{
+	   name: 'Social',
+         data: [{
+            name: 'Barking and Dagenham',
+            value: 44
+        }, {
+            name: 'Barnet',
+            value: 29
+        },
+        {
+            name: "Bexley",
+            value: 0
+        },
+        {
+            name: "Brent",
+            value: 620
+        },
+        {
+            name: "Bromley",
+            value: 62
+        },
+        {
+            name: "Camden",
+            value: 5585
+        },
+        {
+            name: "City of London",
+            value: 0
+        },
+        {
+            name: "Croydon",
+            value: 275
+        },
+        {
+            name: "Ealing",
+            value: 115
+        },
+        {
+            name: "Enfield",
+            value: 10
+        },
+        {
+            name: "Greenwich",
+            value: 34
+        }, {
+            name: "Hackney",
+            value: 3747
+        }, {
+            name: "Hammersmith and Fulham",
+            value: 2480
+        },
+        {
+            name: "Haringey",
+            value: 1181
+        },
+        {
+            name: "Harrow",
+            value: 204
+        },
+        {
+            name: "Havering",
+            value: 30
+        },
+        {
+            name: "Hillingdon",
+            value: 413
+        },
+        {
+            name: "Hounslow",
+            value: 199
+        },
+        {
+            name: "Islington",
+            value: 1859
+        },
+        {
+            name: "Kensington and Chelsea",
+            value: 931
+        },
+        {
+            name: "Kingston upon Thames",
+            value: 4
+        },
+        {
+            name: "Lambeth",
+            value: 3428
+        },
+        {
+            name: "Lewisham",
+            value: 715
+        },
+        {
+            name: "Merton",
+            value: 190
+        },
+        {
+            name: "Newham",
+            value: 733
+        },
+        {
+            name: "Redbridge",
+            value: 18
+        },
+        {
+            name: "Richmond upon Thames",
+            value: 301
+        },
+        {
+            name: "Southwark",
+            value: 2709
+        },
+        {
+            name: "Sutton",
+            value: 0
+        },
+        {
+            name: "Tower Hamlets",
+            value: 3159
+        },
+        {
+            name: "Waltham Forest",
+            value: 1073
+        },
+        {
+            name: "Wandsworth",
+            value: 793
+        },
+        {
+            name: "Westminster",
+            value: 980
+        }]
+    },{
+	   name: 'Family',
+         data: [{
+            name: 'Barking and Dagenham',
+            value: 0
+        }, {
+            name: 'Barnet',
+            value: 104
+        },
+        {
+            name: "Bexley",
+            value: 0
+        },
+        {
+            name: "Brent",
+            value: 800
+        },
+        {
+            name: "Bromley",
+            value: 77
+        },
+        {
+            name: "Camden",
+            value: 3192
+        },
+        {
+            name: "City of London",
+            value: 53
+        },
+        {
+            name: "Croydon",
+            value: 122
+        },
+        {
+            name: "Ealing",
+            value: 637
+        },
+        {
+            name: "Enfield",
+            value: 0
+        },
+        {
+            name: "Greenwich",
+            value: 144
+        }, {
+            name: "Hackney",
+            value: 1196
+        }, {
+            name: "Hammersmith and Fulham",
+            value: 1671
+        },
+        {
+            name: "Haringey",
+            value: 742
+        },
+        {
+            name: "Harrow",
+            value: 2
+        },
+        {
+            name: "Havering",
+            value: 0
+        },
+        {
+            name: "Hillingdon",
+            value: 6
+        },
+        {
+            name: "Hounslow",
+            value: 487
+        },
+        {
+            name: "Islington",
+            value: 2219
+        },
+        {
+            name: "Kensington and Chelsea",
+            value: 2246
+        },
+        {
+            name: "Kingston upon Thames",
+            value: 122
+        },
+        {
+            name: "Lambeth",
+            value: 1180
+        },
+        {
+            name: "Lewisham",
+            value: 225
+        },
+        {
+            name: "Merton",
+            value: 27
+        },
+        {
+            name: "Newham",
+            value: 538
+        },
+        {
+            name: "Redbridge",
+            value: 338
+        },
+        {
+            name: "Richmond upon Thames",
+            value: 306
+        },
+        {
+            name: "Southwark",
+            value: 1253
+        },
+        {
+            name: "Sutton",
+            value: 0
+        },
+        {
+            name: "Tower Hamlets",
+            value: 619
+        },
+        {
+            name: "Waltham Forest",
+            value: 40
+        },
+        {
+            name: "Wandsworth",
+            value: 1200
+        },
+        {
+            name: "Westminster",
+            value: 1842
+        }]
+    },{
+	    name: 'Romantic',
+         data: [{
+            name: 'Barking and Dagenham',
+            value: 0
+        }, {
+            name: 'Barnet',
+            value: 108
+        },
+        {
+            name: "Bexley",
+            value: 0
+        },
+        {
+            name: "Brent",
+            value: 239
+        },
+        {
+            name: "Bromley",
+            value: 42
+        },
+        {
+            name: "Camden",
+            value: 939
+        },
+        {
+            name: "City of London",
+            value: 124
+        },
+        {
+            name: "Croydon",
+            value: 0
+        },
+        {
+            name: "Ealing",
+            value: 1
+        },
+        {
+            name: "Enfield",
+            value: 0
+        },
+        {
+            name: "Greenwich",
+            value: 10
+        }, {
+            name: "Hackney",
+            value: 699
+        }, {
+            name: "Hammersmith and Fulham",
+            value: 660
+        },
+        {
+            name: "Haringey",
+            value: 50
+        },
+        {
+            name: "Harrow",
+            value: 0
+        },
+        {
+            name: "Havering",
+            value: 0
+        },
+        {
+            name: "Hillingdon",
+            value: 0
+        },
+        {
+            name: "Hounslow",
+            value: 2
+        },
+        {
+            name: "Islington",
+            value: 1153
+        },
+        {
+            name: "Kensington and Chelsea",
+            value: 1336
+        },
+        {
+            name: "Kingston upon Thames",
+            value: 0
+        },
+        {
+            name: "Lambeth",
+            value: 902
+        },
+        {
+            name: "Lewisham",
+            value: 62
+        },
+        {
+            name: "Merton",
+            value: 150
+        },
+        {
+            name: "Newham",
+            value: 3
+        },
+        {
+            name: "Redbridge",
+            value: 0
+        },
+        {
+            name: "Richmond upon Thames",
+            value: 210
+        },
+        {
+            name: "Southwark",
+            value: 427
+        },
+        {
+            name: "Sutton",
+            value: 79
+        },
+        {
+            name: "Tower Hamlets",
+            value: 422
+        },
+        {
+            name: "Waltham Forest",
+            value: 0
+        },
+        {
+            name: "Wandsworth",
+            value: 444
+        },
+        {
+            name: "Westminster",
+            value: 667
+        }]
+     }]
+});
+</script>
+</body>
+</html>

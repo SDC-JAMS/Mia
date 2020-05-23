@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<figure class="highcharts-figure">
+    <div id="container"></div>
+    <p class="highcharts-description">
+        This bar chart shows the results of our Random Forest Regression for Model 1B, which seeks to find the variables which contribute most to explaining variance in airbnb overall ratings. It is clear that the accuracy of the listing description in terms of review scores is the most important, followed by review scores for the cleanliness of the airbnb property and communication. In this model, it seems that neighbourhood an airbnb is located in ranks only 8th most important, suggesting that other variables related to how well the airbnb scored in terms of accuracy, cleanliness, etc were more important. 
+    </p>
+</figure>
+
+<!--javascript starts here-->
+<script>
+Highcharts.chart('container', {
+    chart: {
+        type: 'bar'
+    },
+    title: {
+        text: 'Feature Importance of Variables in Explaining Airbnb Overall Ratings (Model 1B)'
+    },
+    xAxis: {
+        categories: ['Review Score Accuracy', 'Review Score Value', 'Review Score Cleanliness', 'Distance', 'Review Score Communication','Price','Number of Reviews','Neighbourhood','Host Response Rate','Review Score Checkin','Accomodates','Review Score Location','Bathrooms','Guests Included','Beds','Instant Bookable','Host is Superhost','Bedrooms','Room Type'],
+        title: {
+            text: "Features",
+        },
+        step:1,
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Relative Feature Importance with Random Forest',
+            align: 'high'
+        },
+        labels: {
+            overflow: 'justify'
+        }
+    },
+    
+    plotOptions: {
+        bar: {
+            dataLabels: {
+                enabled: true
+            }
+        }
+    },
+    credits: {
+        enabled: false
+    },
+    series: [{
+        name: 'Feature importance',
+        data: [0.428042, 0.287671, 0.059634, 0.035015, 0.031182,0.030939,0.026165,0.017641,0.012196,0.010297,0.009142,0.008147,0.007694,0.007006,0.005014,0.004976,0.004270,0.002823]
+    }]
+});
+</script>
+
+<!--styling starts here-->
+<style>
+.highcharts-figure, .highcharts-data-table table {
+    min-width: 310px; 
+    max-width: 800px;
+    margin: 1em auto;
+}
+
+#container {
+    height: 400px;
+    width:1000px;
+}
+
+.highcharts-data-table table {
+	font-family: Verdana, sans-serif;
+	border-collapse: collapse;
+	border: 1px solid #EBEBEB;
+	margin: 100px auto;
+	text-align: center;
+	width: 100%;
+	max-width: 500px;
+}
+.highcharts-data-table caption {
+    padding: 1em;
+    font-size: 1.3em;
+    color: #555;
+}
+.highcharts-data-table th {
+	font-weight: 600;
+    padding: 0.5em;
+}
+.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+    padding: 0.5em;
+}
+.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}
+</style>
