@@ -5,13 +5,17 @@ var map = L.mapbox.map('mapid', 'mapbox.street', {
     accessToken: '<pk.eyJ1IjoibWlhZGliZSIsImEiOiJjazVwOWw3ZXowdDhjM2xuc3U3cGN3NGxwIn0.aYf9qdTxNVl9igxiN-NnIA>'
 })
     .setView([51.509865, -0.118092], 11);
+    if (map.scrollWheelZoom) {
+        map.scrollWheelZoom.disable();
+}
 
+//map.scrollZoom.disable(); is used to disable scoll zoom
 
 L.tileLayer('https://api.mapbox.com/styles/v1/miadibe/ckaffoouw0d1y1il9m090hc52/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibWlhZGliZSIsImEiOiJjazVwOWw3ZXowdDhjM2xuc3U3cGN3NGxwIn0.aYf9qdTxNVl9igxiN-NnIA', {
     maxZoom: 15,
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
         '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-        'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        'Imagery ï¿½ <a href="http://mapbox.com">Mapbox</a>',
 
 }).addTo(map);
 

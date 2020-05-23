@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!--TRIAL
-      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
-
-      <style>
-          #map {position: absolute; top: 0; bottom: 0; left: 0; right: 0;}
-      </style>
-      TRIAL ENDS HERE-->
 
     <title>Data Exploration</title>
     <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
@@ -39,11 +31,6 @@
 </head>
 
 <body>
-    <!--TRIAL
-      <div id = "map"></div>
-      <script>
-      </script>
-      TRIAL ENDS HERE-->
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
@@ -85,9 +72,20 @@
             </div>
         </div>
     </div>
-
-    <section class="ftco-section">
-        <div class="container">
+<!--first margin is for up and down second margin is for left and right when it is written like margin: 10px 10px-->
+    <section class="ftco-section" style= "margin: 20px 0; padding:0;">
+    <div class="container-fluid" style= "margin: 0; padding:0;">
+         <div class="row justify-content-center mb-5 pb-5">
+                <div class="col-md-7 text-center heading-section ftco-animate">
+                    <span class="subheading">Chart</span>
+                    <h2 class="mb-4">Exploratory Charts</h2>
+                    <p>A Small description</p>
+                </div>
+            </div>
+        <div class="row justify-content-center">
+            <iframe src="charts/cluster_bar.html" scrolling="no"  width="600px" height="400px" style="border:0 ;">
+                                </iframe>
+            </div>
             <!-- INSERT HERE SUSAN-->
         </div>
     </section>
@@ -112,7 +110,7 @@
                                     <p class="name">Line Chart</p>
                                     <span class="position">Number vs. ..</span>
                                 </div>
-                                <iframe src="charts/cluster_bar.html" width="600px" height="275px" style="border:0 ;">
+                                <iframe src="charts/cluster_bar.html" width="600px" height="400px" style="border:0 ;">
                                 </iframe>
                             </div>
                         </div>
@@ -140,34 +138,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="item text-center">
-                            <div class="testimony-wrap p-4 pb-5">
-                                <div class="user-img mb-4" style="background-image: url(images/person_1.jpg)">
-                                    <span class="quote d-flex align-items-center justify-content-center">
-                                        <i class="icon-quote-left"></i>
-                                    </span>
-                                </div>
-                                <div class="text">
-                                    <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                                    <p class="name">Dennis Green</p>
-                                    <span class="position">Web Developer</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item text-center">
-                            <div class="testimony-wrap p-4 pb-5">
-                                <div class="user-img mb-4" style="background-image: url(images/person_1.jpg)">
-                                    <span class="quote d-flex align-items-center justify-content-center">
-                                        <i class="icon-quote-left"></i>
-                                    </span>
-                                </div>
-                                <div class="text">
-                                    <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                                    <p class="name">Dennis Green</p>
-                                    <span class="position">System Analytics</span>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

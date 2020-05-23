@@ -64,13 +64,12 @@
 
 	var carousel = function() {
 		$('.carousel-testimony').owlCarousel({
-			center: true,
-			loop: true,
-			items:1,
+			items:2,
 			margin: 30,
 			stagePadding: 0,
 			nav: true,
 			navText: ['<span class="ion-ios-arrow-back">', '<span class="ion-ios-arrow-forward">'],
+            slideBy: 2,
 			responsive:{
 				0:{
 					items: 1
@@ -79,7 +78,7 @@
 					items: 2
 				},
 				1000:{
-					items: 3
+					items: 2
 				}
 			}
 		});

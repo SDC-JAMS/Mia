@@ -20,8 +20,8 @@ Highcharts.chart('container', {
   chart: {
     polar: true,
     type: 'line',
-    width: 200,
-    height: 300,
+    width: 400,
+    height: 350,
     margin: 0
   },
 
@@ -49,7 +49,12 @@ Highcharts.chart('container', {
       'Location', 'Value'
     ],
     tickmarkPlacement: 'on',
-    lineWidth: 0
+    lineWidth: 0,
+    labels: {
+        style: {
+            fontSize: '9px'
+        }
+    }
   },
 
   yAxis: {
@@ -64,10 +69,14 @@ Highcharts.chart('container', {
   },
 
   legend: {
-    align: 'right',
+    align: 'left',
     verticalAlign: 'bottom',
-    layout: 'horizontal',
-    y: 30
+    layout: 'vertical',
+    y: 20,
+    itemStyle: {
+        fontSize: 9,
+        font: '"Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
+    }
   },
 
   series: [{
@@ -104,7 +113,7 @@ Highcharts.chart('container', {
           layout: 'horizontal'
         },
         pane: {
-          size: '50%'
+          size: '100%'
         }
       }
     }]
@@ -116,10 +125,10 @@ Highcharts.chart('container', {
 <!--styling starts here-->
 <style>
 .highcharts-figure, .highcharts-data-table table {
-    min-width: 200px;
-    max-width: 200px;
-    min-height: 200px;
-    height:200px;
+    min-width: 400px;
+    max-width: 400px;
+    min-height: 300px;
+    height:300px;
 
 }
 
@@ -129,8 +138,8 @@ Highcharts.chart('container', {
 	border: 1px solid #EBEBEB;
 	margin: 10px auto;
 	text-align: center;
-	width: 200px;
-	max-width: 200px;
+	width: 400px;
+	max-width: 400px;
 }
 .highcharts-data-table caption {
     padding: 1em 0;
