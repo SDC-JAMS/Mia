@@ -80,8 +80,14 @@ var chart = Highcharts.chart('container', {
     title: {
         text: 'Polarity and Subjectivity of Reviews'
     },
+	colors: ['#527a7a','#adad85','#d9b38c','#737373'],
     credits:{
       enabled: false
+    },
+	navigation: {
+        buttonOptions: {
+            enabled: false
+        }
     },
     accessibility: {
         point: {
@@ -91,8 +97,8 @@ var chart = Highcharts.chart('container', {
                     return false;
                 }
 
-                return point.category + ', low ' + point.low + ', median ' +
-                    point.median + ', high ' + point.high;
+                return point.category + ', low ' + Highcharts.numberFormat(Math.abs(point.low),3) + ', median ' +
+                    Highcharts.numberFormat(Math.abs(point.median),3) + ', high ' + Highcharts.numberFormat(Math.abs(point.median),3);
             }
         },
 
