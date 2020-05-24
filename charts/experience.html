@@ -22,10 +22,14 @@ Highcharts.chart('container', {
         type: 'packedbubble',
         height: '100%'
     },
- colors: ['#527a7a','#adad85',' #d9e6f2','#d9b38c','#737373'
-    ],
+	colors: ['#527a7a','#adad85','#8cb3d9','#d9b38c','#8c8c8c'],
 	credits:{
       enabled: false
+    },
+	navigation: {
+        buttonOptions: {
+            enabled: false
+        }
     },
     title: {
         text: 'Review Counts by Experience Types'
@@ -36,7 +40,7 @@ Highcharts.chart('container', {
     },
     plotOptions: {
         packedbubble: {
-            minSize: '5%',
+            minSize: '2%',
             maxSize: '60%',
             zMin: 0,
             zMax: 1000,
