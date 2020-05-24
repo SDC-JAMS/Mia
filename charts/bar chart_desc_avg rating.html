@@ -2,9 +2,14 @@
 <!--source code from https://code.tutsplus.com/tutorials/getting-started-with-chartjs-line-and-bar-charts--cms-28384-->
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
-
-<canvas id="bar-chart-horizontal" width="400" height="100"></canvas>
-
+<div style='width: 70%; float: left;'>
+    <canvas id="bar-chart-horizontal" width="400" height="100"></canvas>
+</div>
+<!--paragraph here will take up 30% of the page-->
+<div style='width: 30%; float: left;'>
+    <h1 style='margin-left: 60px; font-size: 10px; text-align: center; color: darkolivegreen'>Title</h1>
+<p style='margin-left: 60px; font-size: 8px; color: darkgrey;'>Add more description here..</p>
+</div>
 <script>
 new Chart(document.getElementById("bar-chart-horizontal"), {
     type: 'horizontalBar',
