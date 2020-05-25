@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8"><link rel="icon" href="https://jscdn.com.cn/highcharts/images/favicon.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://code.highcharts.com.cn/highcharts/highcharts.js"></script>
+        <script src="https://code.highcharts.com.cn/highcharts/modules/exporting.js"></script>
+        <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+    </head>
+    <body>
+        <div id="container" style="min-width:400px;height:400px"></div>
+        <script>
+var categories = ['[-1.0,-0.9)','[-0.9,-0.8)','[-0.8,-0.7)','[-0.7,-0.6)','[-0.6,-0.5)','[-0.5,-0.4)','[-0.4,-0.3)','[-0.3,-0.2)','[-0.2,-0.1)','[-0.1,0)',
+			'[0,0.1)','[0.1,0.2)','[0.2,0.3)','[0.3,0.4)','[0.4,0.5)','[0.5,0.6)','[0.6-0.7)','[0.7-0.8)','[0.8-0.9)','[0.9-1.0]'
+                  ];
+Highcharts.chart('container', {
+    chart: {
+        type: 'bar'
+    },
+	colors: ['#339933', '#AA4643'],
+    title: {
+        text: 'Polarity Distribution'
+    },
+	credits:{
+      enabled: false
+    },
+	navigation: {
+        buttonOptions: {
+            enabled: false
+        }
+    },
+    xAxis: [{
+        categories: categories,
+        reversed: false,
+        labels: {
+            step: 1
+        }
+    }, { // mirror axis on right side
+        opposite: true,
+        reversed: false,
+        categories: categories,
+        linkedTo: 0,
+        labels: {
+            step: 0.5
+        }
+    }],
+    yAxis: {
+        title: {
+            text: null
+        },
+        labels: {
+            formatter: function () {
+                return Math.abs(this.value);
+            }
+        }
+    },
+
+    plotOptions: {
+        series: {
+            stacking: 'normal'
+        }
+    },
+
+    tooltip: {
+        formatter: function () {
+            return '<b>' + this.series.name + ', interval ' + this.point.category + '</b><br/>' +
+                'Counts: ' + Math.abs(this.point.y);
+        }
+    },
+
+    series: [{
+        name: 'Guest',
+        data: [-126,-611,-113,-1526,-91,-1258,-1791,-5189,-11232,-14418,-244008,-94908,-144382,-189170,-143001,-84534,-55093,-14658,-14835,-27631
+		]
+    }, {
+        name: 'Host',
+        data: [0,0,11,0,0,692,1426,3838,11435,27309,370981,186732,201855,131852,62690,31191,10772,1853,3281,2658
+		]
+    }]
+});
+        </script>
+    </body>
+</html>
