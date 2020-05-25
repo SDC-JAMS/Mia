@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8"><link rel="icon" href="https://jscdn.com.cn/highcharts/images/favicon.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://code.highcharts.com.cn/highcharts/highcharts.js"></script>
+        <script src="https://code.highcharts.com.cn/highcharts/modules/exporting.js"></script>
+        <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+    </head>
+    <body>
+        <div id="container" style="min-width:400px;height:400px"></div>
+        <script>
+var categories = ['[0,0.1)','[0.1,0.2)','[0.2,0.3)','[0.3,0.4)','[0.4,0.5)','[0.5,0.6)','[0.6-0.7)','[0.7-0.8)','[0.8-0.9)','[0.9-1.0]'
+                  ];
+
+Highcharts.chart('container', {
+    chart: {
+        type: 'bar'
+    },
+	colors: ['#339933', '#AA4643'],
+    title: {
+        text: 'Subjectivity Distribution'
+    },
+	credits:{
+      enabled: false
+    },
+	navigation: {
+        buttonOptions: {
+            enabled: false
+        }
+    },
+    xAxis: [{
+        categories: categories,
+        reversed: false,
+        labels: {
+            step: 1
+        }
+    }, { // mirror axis on right side
+        opposite: true,
+        reversed: false,
+        categories: categories,
+        linkedTo: 0,
+        labels: {
+            step: 1
+        }
+    }],
+    yAxis: {
+        title: {
+            text: null
+        },
+        labels: {
+            formatter: function () {
+                return Math.abs(this.value);
+            }
+        }
+    },
+
+    plotOptions: {
+        series: {
+            stacking: 'normal'
+        }
+    },
+
+    tooltip: {
+        formatter: function () {
+            return '<b>' + this.series.name + ', interval ' + this.point.category + '</b><br/>' +
+                'Counts: ' + Math.abs(this.point.y);
+        }
+    },
+
+    series: [{
+        name: 'Guest',
+        data: [-191154,-7806,-16491,-50706,-102062,-186562,-223995,-110402,-96896,-62501
+		]
+    }, {
+        name: 'Host',
+        data: [251478,21352,72854,157459,202000,187752,95923,31489,17044,11224
+		]
+    }]
+});
+        </script>
+    </body>
+</html>

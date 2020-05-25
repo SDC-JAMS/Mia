@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script type="text/javascript" src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<title>polarity</title>
+</head>
+<body>
+<div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+<pre id="csv" style="display:none">
+Barking and Dagenham,0.335933,0.192452353
+Barnet,0.374062,0.19001024
+Bexley,0.388625,0.222371735
+Brent,0.352359,0.229542421
+Bromley,0.383621,0.186538584
+Camden,0.357383,0.192621829
+City of London,0.357697,0.207325838
+Croydon,0.376982,0.168792147
+Ealing,0.380686,0.142334272
+Enfield,0.379565,0.147932885
+Greenwich,0.389382,0.198168883
+Hackney,0.379265,0.235972497
+Hammersmith and Fulham,0.363915,0.210698773
+Haringey,0.376072,0.222692494
+Harrow,0.398837,0.195305233
+Havering,0.413303,0.157422169
+Hillingdon,0.405643,0.159522591
+Hounslow,0.401192,0.221913334
+Islington,0.359561,0.192277649
+Kensington and Chelsea,0.366201,0.220498486
+Kingston upon Thames,0.400996,0.22117635
+Lambeth,0.354031,0.191856424
+Lewisham,0.358294,0.189816334
+Merton,0.405281,0.170737883
+Newham,0.358904,0.169675033
+Redbridge,0.372885,0.187508574
+Richmond upon Thames,0.418434,0.211845925
+Southwark,0.352309,0.204895983
+Sutton,0.40679,0.274345165
+Tower Hamlets,0.353304,0.213867208
+Waltham Forest,0.363385,0.220814053
+Wandsworth,0.380166,0.187691108
+Westminster,0.350571,0.19150404
+</pre>
+<script language="JavaScript">
+$(function() {
+  Highcharts.chart('container', {
+    chart: {
+      backgroundColor: '',
+      type: 'scatter',
+      zoomType: 'xy'
+    },
+    title: {
+      text: 'Polarity: Guest V.S. Host'
+    },
+
+    xAxis: {
+      title: {
+        enabled: true,
+        text: 'Mean Polarity of Guests'
+      },
+      startOnTick: true,
+      endOnTick: true,
+      showLastLabel: true
+    },
+    yAxis: {
+      title: {
+        text: 'Mean Polarity of Hosts'
+
+      }
+    },
+    legend: {
+      layout: 'vertical',
+      align: 'left',
+      verticalAlign: 'top',
+      x: 1000,
+      y: 70,
+      floating: true,
+      backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || 'white',
+	  borderColor: '#CCC',
+      borderWidth: 1,
+	  shadow: false
+    },
+    plotOptions: {
+      scatter: {
+        marker: {
+		  fillColor:"#339933",
+          radius: 5,
+          states: {
+            hover: {
+              enabled: true,
+              lineColor: 'rgb(100,100,100)'
+            }
+          }
+        },
+        states: {
+          hover: {
+            marker: {
+              enabled: false
+            }
+          }
+        },
+        tooltip: {
+          headerFormat: '<b>{point.key}</b><br>',
+          pointFormat: 'Guest : {point.x} <br> Host : {point.y}'
+        }
+      }
+    },
+	credits:{
+      enabled: false
+    },
+	navigation: {
+        buttonOptions: {
+            enabled: false
+        }
+    },
+    data: {
+      firstRowAsNames: false,
+      csv: document.getElementById('csv').innerHTML,
+      seriesMapping: [{
+        name: 0,
+        x: 1,
+        y: 2
+      }]
+    },
+  });
+});
+</script>
+</body>
+</html>
