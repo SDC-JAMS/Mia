@@ -1,15 +1,9 @@
 // JavaScript source code
 
 //  set Leaflet
-var map = L.mapbox.map('mapid', 'mapbox.street', {
-    accessToken: '<pk.eyJ1IjoibWlhZGliZSIsImEiOiJjazVwOWw3ZXowdDhjM2xuc3U3cGN3NGxwIn0.aYf9qdTxNVl9igxiN-NnIA>'
-})
+var map = L.mapbox.map('mapid')
     .setView([51.509865, -0.118092], 11);
-    if (map.scrollWheelZoom) {
-        map.scrollWheelZoom.disable();
-}
 
-//map.scrollZoom.disable(); is used to disable scoll zoom
 
 L.tileLayer('https://api.mapbox.com/styles/v1/miadibe/ckaffoouw0d1y1il9m090hc52/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibWlhZGliZSIsImEiOiJjazVwOWw3ZXowdDhjM2xuc3U3cGN3NGxwIn0.aYf9qdTxNVl9igxiN-NnIA', {
     maxZoom: 15,
@@ -19,123 +13,39 @@ L.tileLayer('https://api.mapbox.com/styles/v1/miadibe/ckaffoouw0d1y1il9m090hc52/
 
 }).addTo(map);
 
+var url_sentiment = "http://dev.spatialdatacapture.org:8707/data/sa_summary/";
 
-//get airbnb point data from API
+// Add Guest Polarity Layer
 
-var url = "http://dev.spatialdatacapture.org:8707/data/airbnb_point";
+$.getJSON(url_sentiment, function (json) {
 
-// Location Point Data (test layer, maybe deleted later!)
+    var guest_polarity_array = [];
 
-var geojsonmysql = [];
+    var wkt = new Wkt.Wkt()
 
-$.getJSON(url, function (data) {
-    json = data;
+    json.forEach(function (layer) {
 
-// convert the json data from mysql to become geoJSON
-    json.forEach(function (point) {
-        var lat = point.latitude;
-        var lon = point.longitude;
-
-        var feature = {
-            type: 'Feature',
-            properties: point,
-            geometry: {
-                type: 'Point',
-                coordinates: [lon, lat]
-            }
-        };
-
-        geojsonmysql.push(feature);
-    });
-
- 
-    var dummy = { type: 'FeatureCollection', features: geojsonmysql };
-
-    //Marker Style
-
-    var geojsonMarkerOptions = {
-        radius: 3,
-        fillColor: "#6dff33",
-        color: "#000",
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.8
-    };
-
-
-    L.geoJson(dummy, {
-        onEachFeature: function (feature, layer) {
-            /*                        pointlayer.addLayer(layer)*/
-            // some other code can go here, like adding a popup with layer.bindPopup("Hello")
-        },
-        pointToLayer: function (feature, latlng) {
-            return L.circleMarker(latlng, geojsonMarkerOptions);
-        }
-    })
-
-});
-
-var pointlayer = L.layerGroup().addTo(map)
-
-// ADD TEST Layer for call geojson file from mysql
-
-/*var test_geo = [];
-
-$.getJSON('http://dev.spatialdatacapture.org:8707/data/geo_test/', function (data) {
-
-    data.forEach(function (point) {
+        wkt.read(layer.geometry)
 
         var feature = {
             type: 'Feature',
             properties: {
-                'neighbourhood': point.neighbourhood,
+                'neighbourhood': layer.neighbourhood,
+                'guestpolarity_mean': layer.guest_polarity_mean,
+                'Link': layer.guest_link
             },
-            geometry: {
-                type: 'MULTIPOLYGON',
-                coordinates: point.geometry.replace("(", "[").replace(")", "]").substring(point.geometry.indexOf("("), point.geometry.length)
-            }
+
+            geometry: wkt.toJson()
+
         };
 
-        test_geo.push(feature);
-
+        guest_polarity_array.push(feature);
 
     });
 
-*//*    var bubblef = { type: 'FeatureCollection', features: bubblejsonmysql };
+    var geoJSON = { type: 'FeatureCollection', features: guest_polarity_array };
 
-
-    var dataRows = [{
-        geom: json[1].geometry
-    }];
-
-    var features = [];
-    dataRows.forEach(function (row) {
-        var coords = row.geom.replace("(", "[").replace(")", "]").substring(row.geom.indexOf("("), row.geom.length);
-        features.push({
-            "type": "Feature",
-            "properties": {
-                "id": 1
-            },
-
-            "geometry": {
-                "type": "MULTIPOLYGON",
-                "coordinates": coords
-            }
-        });
-    });*//*
-
-    var testgeo = { type: 'FeatureCollection', features: test_geo };
-
-    console.log(testgeo)
-})
-
-var testgeo = L.layerGroup().addTo(map)*/
-
-// Add Guest Polarity Layer
-
-$.getJSON('./geojson/guest_polarity.geojson', function (json) {
-
-    L.geoJSON(json, {
+    L.geoJSON(geoJSON, {
      
         onEachFeature: function (feature, layer) {
 
@@ -189,8 +99,35 @@ var guest_polarity = L.layerGroup().addTo(map)
 
 // Add host Polarity Layer
 
-$.getJSON('./geojson/host_polarity.geojson', function (json) {
-    L.geoJSON(json, {
+$.getJSON(url_sentiment, function (json) {
+
+    var host_polarity_array = [];
+
+    var wkt = new Wkt.Wkt()
+
+    json.forEach(function (layer) {
+
+        wkt.read(layer.geometry)
+
+        var feature = {
+            type: 'Feature',
+            properties: {
+                'neighbourhood': layer.neighbourhood,
+                'hostpolarity_mean': layer.host_polarity_mean,
+                'Link': layer.host_link
+            },
+
+            geometry: wkt.toJson()
+
+        };
+
+        host_polarity_array.push(feature);
+
+    });
+
+    var geoJSON = { type: 'FeatureCollection', features: host_polarity_array };
+
+    L.geoJSON(geoJSON, {
 
         onEachFeature: function (feature, layer) {
 
@@ -240,12 +177,39 @@ $.getJSON('./geojson/host_polarity.geojson', function (json) {
     })
 })
 
-var host_polarity = L.layerGroup().addTo(map)
+var host_polarity = L.layerGroup()
 
 // // Add Guest Subjectivity Layer
 
-$.getJSON('./geojson/guest_subjectivity.geojson', function (json) {
-    L.geoJSON(json, {
+$.getJSON(url_sentiment, function (json) {
+
+    var guest_subjectivity_array = [];
+
+    var wkt = new Wkt.Wkt()
+
+    json.forEach(function (layer) {
+
+        wkt.read(layer.geometry)
+
+        var feature = {
+            type: 'Feature',
+            properties: {
+                'neighbourhood': layer.neighbourhood,
+                'guestsubjectivity_mean': layer.guest_subjectivity_mean,
+                'Link': layer.guest_link
+            },
+
+            geometry: wkt.toJson()
+
+        };
+
+        guest_subjectivity_array.push(feature);
+
+    });
+
+    var geoJSON = { type: 'FeatureCollection', features: guest_subjectivity_array };
+
+    L.geoJSON(geoJSON, {
 
         onEachFeature: function (feature, layer) {
 
@@ -295,12 +259,39 @@ $.getJSON('./geojson/guest_subjectivity.geojson', function (json) {
     })
 })
 
-var guest_subjectivity = L.layerGroup().addTo(map)
+var guest_subjectivity = L.layerGroup()
 
 // Add host Subjectivity Layer
 
-$.getJSON('./geojson/host_subjectivity.geojson', function (json) {
-    L.geoJSON(json, {
+$.getJSON(url_sentiment, function (json) {
+
+    var host_subjectivity_array = [];
+
+    var wkt = new Wkt.Wkt()
+
+    json.forEach(function (layer) {
+
+        wkt.read(layer.geometry)
+
+        var feature = {
+            type: 'Feature',
+            properties: {
+                'neighbourhood': layer.neighbourhood,
+                'hostsubjectivity_mean': layer.host_subjectivity_mean,
+                'Link': layer.host_link
+            },
+
+            geometry: wkt.toJson()
+
+        };
+
+        host_subjectivity_array.push(feature);
+
+    });
+
+    var geoJSON = { type: 'FeatureCollection', features: host_subjectivity_array };
+
+    L.geoJSON(geoJSON, {
 
         onEachFeature: function (feature, layer) {
 
@@ -333,89 +324,6 @@ $.getJSON('./geojson/host_subjectivity.geojson', function (json) {
                 this.setStyle(Initstyle)
             });
 
-/*            // Highchart inside Popup
- *            // Create div with class name highchart
-            var div = L.DomUtil.create('div', 'highchart');
-
-            // Bind popup to layer with div as content
-            layer.bindPopup(div);
-
-            // Handle event when popup opens
-            layer.on('popupopen', function (e) {
-
-                console.log(e.target);  // layer object
-                console.log(e.target.feature); // layer's feature object
-                console.log(e.popup); // popup object
-                console.log(e.popup.getContent()); // the div
-
-                // Now do the highcharts stuff
-
-                var chartplotoptions = {
-
-                    chart: {
-                        type: 'line'
-                    },
-                    title: {
-                        text: 'Growth'
-                    },
-
-                    xAxis: {
-                        allowDecimals: true,
-                        categories: ['20151114', '20151126'],
-                        labels: {
-                            formatter: function () {
-                                return this.value;
-                            }
-                        }
-                    },
-                    yAxis: {
-                        startOnTick: false,
-                        minPadding: 0.05,
-                        title: {
-                            text: 'Crop Growth',
-
-                        },
-                        labels: {
-                            formatter: function () {
-                                return this.value;
-                            }
-                        }
-                    },
-                    tooltip: {
-                        pointFormat: '{series.name}{point.y}'
-                    },
-                    plotOptions: {
-
-                        area: {
-                            pointStart: -20,
-                            threshold: 10,
-                            marker: {
-                                enabled: false,
-                                symbol: 'circle',
-                                radius: 2,
-                                states: {
-                                    hover: {
-                                        enabled: false
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    series: [{
-                        name: 'Growth',
-                        data: [parseFloat(feature.properties.hostsubjectivity_mean)]
-                    },
-
-                    ]
-                };
-
-                Highcharts.chart(e.popup.getContent(), {
-                chartplotoptions
-
-                });
-
-            });*/
-
             host_subjectivity.addLayer(layer)
         },
 
@@ -433,7 +341,7 @@ $.getJSON('./geojson/host_subjectivity.geojson', function (json) {
     })
 })
 
-var host_subjectivity = L.layerGroup().addTo(map)
+var host_subjectivity = L.layerGroup()
 
 // Legend for differnt layer
 
@@ -613,18 +521,16 @@ L.control.textbox({ position: 'bottomleft' }).addTo(map);
 
 var baseMaps = {
     "Avg. Guest Polarity": guest_polarity,
-/*    "test": testgeo,*/
     "Avg. Host Polarity": host_polarity,
     "Avg. Guest Subjectivity": guest_subjectivity,
     "Avg. Host Subjectivity": host_subjectivity,
 };
 
 var overlayMaps = {
-    "Location": pointlayer
 
 };
 
-L.control.layers(baseMaps, overlayMaps, { collapsed: false }).addTo(map);
+var layerControl = L.control.layers(baseMaps, overlayMaps, { collapsed: false }).addTo(map);
 
 // Control the legend
 map.on('baselayerchange', function (eventLayer) {

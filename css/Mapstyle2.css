@@ -1,0 +1,147 @@
+@import url(https://fonts.googleapis.com/css?family=Arya);
+@import url(https://fonts.googleapis.com/css?family=Doppio+One);
+@import url(https://fonts.googleapis.com/css?family=Nova+Slim);
+@import url(https://fonts.googleapis.com/css?family=Bubbler+One);
+
+h1{
+	font-size: 100px;
+	font-size: 8vw;
+	text-align: center;
+	font-family: "Doppio One", "Arial";
+	line-height: 60px;
+	text-shadow: 5px 5px black;
+}
+h2{
+	font-size: 80px;
+ 	font-size: 5vw;
+	font-family:"Arya",sans-serif,"Arial";
+ 	text-align: center;
+	line-height: 4vw;
+	text-shadow: 2px 2px rgb(28, 30, 33);
+	overflow-wrap: break-word;
+	white-space: pre-line;
+}
+
+h3{
+	font-family:"Arya",sans-serif;
+	font-size: 50px;
+	font-size: 2.5vw;
+	font-style: italic;
+	font-weight: 100;
+ 	text-align: center;
+	overflow-wrap: break-word;
+	white-space: pre-line;
+	line-height: 30px;
+	line-height: 2.5vw;
+	transition: fadein 5s;
+}
+
+.highchart {
+	width: 400px;
+	height: 400px;
+}
+
+.box {
+	background-color: rgba(255, 255, 255, 0.72);
+	position: fixed;
+	width: 30%;
+	bottom: 10px;
+	left: 10px;
+	height: 30%;
+	z-index: 9998;
+}
+
+p {
+margin-top: 50px;
+opacity: 0.7;
+
+}
+
+body{
+	font-family: 'Montserrat', sans-serif;
+	text-align: justify;
+	height: 100%;
+	color: white;
+	background: rgb(28, 30, 33);
+}
+body::after{
+	content:'';
+	display:block;
+	height:40px;
+}
+
+a{
+	color: blue; text-decoration: none;
+}
+
+h4{
+	font-size: 22px;
+	text-align: justify;
+}
+
+#home{
+	position: fixed;
+	top: 10px;
+	left: 10px;
+}
+
+#home2{
+	position: fixed;
+	top: 20px;
+	left: 10px;
+}
+
+#headerdata{
+	height: 110px;
+	width: 100%;
+}
+
+.image1{
+	float: left;
+	width: 110px;
+	opacity:0.7;
+	transition: transform .2s;
+	background-color: rgb(28, 30, 33);
+
+}
+.image1:hover {
+  opacity: 1;
+}
+
+
+button:focus {outline:0;}
+
+.layerButton{
+	padding: 5px;
+	background-color: orange;
+	color: black;
+	font-size: 22px;
+	font-family: "Roboto Slab", Corbel, sans-serif;
+	width: auto;
+	height: auto;
+	cursor: pointer;
+	margin: 5px;
+}
+#titleBar {
+	background-color: black;
+	width: 100%;
+	height: auto;
+	position: relative;
+	top: 0;
+}
+
+.legend {
+    line-height: 18px;
+    color: #555;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+#mapid {
+	height: 100vh;
+	width: 100%;
+}
