@@ -9,74 +9,88 @@
 
 <figure class="highcharts-figure">
     <div id="container"></div>
-    <p class="highcharts-description">
+    <!-- <p class="highcharts-description">
         Every column represents the coefficient value of a statistically significant variable in our OLS regression model, which examines the impact of various explanatory variables on the overall rating of an airbnb. We confirm that the neighbourhood that an airbnb is located may indeed be significant. 
-    </p>
+    </p>-->
 </figure>
 
 <!--javascript portion starts here-->
 <script>
     Highcharts.chart('container', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Chart Showing Value of coefficients for OLS Model 2A'
-    },
-    xAxis: {
-        categories: ['Median House Price (£)','Median Age']
-    },
-    yAxis:{
-        
-    },
-    credits: {
-        enabled: true
-    },
-    series: [{
-        name: 'Beta-coefficient',
-        data: [0.0025, -5.9756],
-        minPointLength:10,
-    }]
-});
+        chart: {
+            type: 'column'
+        },
+        exporting: {
+            enabled: false
+        },
+        title: {
+            text: 'Chart Showing Value of coefficients for OLS Model 2A'
+        },
+        xAxis: {
+            categories: ['Median House Price (£)', 'Median Age']
+        },
+        yAxis: {
+
+        },
+        credits: {
+            enabled: true
+        },
+        series: [{
+            name: 'Beta-coefficient',
+            data: [0.0025, -5.9756],
+            minPointLength: 10,
+        }]
+    });
+
 </script>
 
 <!--styling starts here-->
 <style>
-#container {
-    height: 400px; 
-}
+    #container {
+        height: 400px;
+    }
 
-.highcharts-figure, .highcharts-data-table table {
-    min-width: 310px; 
-    max-width: 500px;
-    margin: 1em auto;
-}
+    .highcharts-figure,
+    .highcharts-data-table table {
+        min-width: 310px;
+        max-width: 800px;
+        margin: 1em auto;
+    }
 
-.highcharts-data-table table {
-    font-family: Verdana, sans-serif;
-    border-collapse: collapse;
-    border: 1px solid #EBEBEB;
-    margin: 10px auto;
-    text-align: center;
-    width: 100%;
-    max-width: 500px;
-}
-.highcharts-data-table caption {
-    padding: 1em 0;
-    font-size: 1.2em;
-    color: #555;
-}
-.highcharts-data-table th {
-	font-weight: 600;
-    padding: 0.5em;
-}
-.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
-    padding: 0.5em;
-}
-.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
-    background: #f8f8f8;
-}
-.highcharts-data-table tr:hover {
-    background: #f1f7ff;
-}
+    .highcharts-data-table table {
+        font-family: Verdana, sans-serif;
+        border-collapse: collapse;
+        border: 1px solid #EBEBEB;
+        margin: 10px auto;
+        text-align: center;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .highcharts-data-table caption {
+        padding: 1em 0;
+        font-size: 1.2em;
+        color: #555;
+    }
+
+    .highcharts-data-table th {
+        font-weight: 600;
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table td,
+    .highcharts-data-table th,
+    .highcharts-data-table caption {
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table thead tr,
+    .highcharts-data-table tr:nth-child(even) {
+        background: #f8f8f8;
+    }
+
+    .highcharts-data-table tr:hover {
+        background: #f1f7ff;
+    }
+
 </style>

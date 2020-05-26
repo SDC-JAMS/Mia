@@ -8,9 +8,9 @@
 
 <figure class="highcharts-figure">
     <div id="container"></div>
-    <p class="highcharts-description">
+   <!-- <p class="highcharts-description">
         Using K-means clustering, we assigned each of the 33 London boroughs to a cluster based on their price, overall rating and review scores. We derived 5 clusters, and display their detailed review scores here.
-    </p>
+    </p>-->
 </figure>
 
 <!--javascript starts here-->
@@ -25,7 +25,9 @@ Highcharts.chart('container', {
   accessibility: {
     description: 'A spiderweb chart compares the review scores for each cluster. Each spoke represents one of the 7 aspects of reviews: accuracy. The chart is interactive, and each data point is displayed upon hovering.'
   },
-
+ exporting: {
+                enabled: false
+ },
   title: {
     text: 'Detailed Review Scores by Cluster',
     x: -80
