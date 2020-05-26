@@ -6,7 +6,7 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-<figure class="highcharts-figure">
+<figure class="highcharts-figure" style="margin: 0;">
     <div id="container"></div>
    <!-- <p class="highcharts-description">
         Using K-means clustering, we assigned each of the 33 London boroughs to a cluster based on their price, overall rating and review scores. We derived 5 clusters, and display their detailed review scores here.
@@ -19,7 +19,9 @@ Highcharts.chart('container', {
 
   chart: {
     polar: true,
-    type: 'line'
+    type: 'line',
+    width: 500,
+    height: 410,
   },
 
   accessibility: {
@@ -29,8 +31,7 @@ Highcharts.chart('container', {
                 enabled: false
  },
   title: {
-    text: 'Detailed Review Scores by Cluster',
-    x: -80
+    text: 'Detailed Review Scores by Cluster'
   },
 
   pane: {
@@ -59,7 +60,10 @@ Highcharts.chart('container', {
   legend: {
     align: 'right',
     verticalAlign: 'middle',
-    layout: 'vertical'
+    layout: 'vertical',
+    align: 'left',
+    x: 5,
+    itemDistance: 10,
   },
 
   series: [{
@@ -109,7 +113,7 @@ Highcharts.chart('container', {
 <style>
 .highcharts-figure, .highcharts-data-table table {
     min-width: 320px;
-    max-width: 1200px;
+    max-width: 900px;
     min-height: 500px;
     height:auto;
 
