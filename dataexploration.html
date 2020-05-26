@@ -74,194 +74,89 @@
     </div>
     <!--first margin is for up and down second margin is for left and right when it is written like margin: 10px 10px-->
     <section class="ftco-section" style="margin: 50px 0; padding:0;">
-        <div class="container-fluid" style="margin: 0; padding:0;">
-            <div class="row justify-content-center mb-5 pb-5">
-                <div class="col-md-7 text-center heading-section ftco-animate">
-                    <style>
 
-* {
-  box-sizing: border-box;
-}
-
-
-
-/* Create two unequal columns that floats next to each other */
-.column {
-  float: left;
-  padding: 10px;
-  height: 300px; /* Should be removed. Only for demonstration */
-}
-
-
-
-.left {
-  width: 25%;
-}
-
-
-
-.right {
-  width: 75%;
-}
-
-
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-</style>
-
-
-
-<h2>Two Unequal Columns</h2>
-
-
-
-<div class="row">
-  <div class="column left" style="background-color:#aaa;">
-    <h2>Column 1</h2>
-    <p>Some text..</p>
-  </div>
-  <div class="column right" style="background-color:#bbb;">
-    <h2>Column 2</h2>
-    <p>Some text..</p>
-      #board {
-    float: left;
-    height: 98%;
-    max-height: 98%;
-    width: 4300px; /*smaller than columns to force horizontal scroll */
-    margin: auto;
-    border: none;
-    overflow-x: scroll;
-}
-
-#columns {
-    height: 98%;
-    float: left;
-    width: 4800px; /* need this much width */
-    margin: auto;
-    border: none;
-    overflow-x:auto;
-}
-
-.column {
-    float: left;
-    padding-bottom: 50px;
-    width: 240px;
-    height: 100%;
-    max-height: 100%;
-    padding: 5px;
-    padding-bottom: 100px;
-    margin-left: 5px;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-<div id="board">
-    <div id="columns">
-        <div id="col1" class="column">
-            <div class="card"> ...content... </div>
-            <div class="card"> ...content... </div>
-            <div class="card"> ...content... </div>
-            <div class="card"> ...content... </div>
-        </div>
-        <div id="col2" class="column">
-            <div class="card"> ...content... </div>
-            <div class="card"> ...content... </div>
-            <div class="card"> ...content... </div>
-            <div class="card"> ...content... </div>
-        </div>
-        <!-- 12-16 more columns -->
-    </div>
-      </div>
-  </div>
-</div>
-    <span class="subheading">Descriptive Visualisation </span>
-                    <span class="subheading">Descriptive Visualisation </span>
-                    <h2 class="mb-4">Exploratory Charts</h2>
-                    <p>A Small description</p>
+        <span class="subheading">Descriptive Visualisation </span>
+        <span class="subheading">Descriptive Visualisation </span>
+        <h2 class="mb-4">Exploratory Charts</h2>
+        <p>A Small description</p>
+        <div class="row mt-3">
+            <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services d-block text-center">
+                    <div class="d-flex justify-content-center">
+                        <div class="icon color-3 d-flex justify-content-center mb-3"><span class="align-self-center icon-upload"></span></div>
+                    </div>
+                    <div class="media-body p-2 mt-3">
+                        <h3 class="heading">Collect</h3>
+                        <p>Airbnb &amp; Census Data </p>
+                    </div>
                 </div>
-                <div class="row mt-3">
-                    <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
-                        <div class="media block-6 services d-block text-center">
-                            <div class="d-flex justify-content-center">
-                                <div class="icon color-3 d-flex justify-content-center mb-3"><span class="align-self-center icon-upload"></span></div>
-                            </div>
-                            <div class="media-body p-2 mt-3">
-                                <h3 class="heading">Collect</h3>
-                                <p>Airbnb &amp; Census Data </p>
-                            </div>
-                        </div>
+            </div>
+            <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services d-block text-center">
+                    <div class="d-flex justify-content-center">
+                        <div class="icon color-1 d-flex justify-content-center mb-3"><span class="align-self-center icon-bar-chart"></span></div>
                     </div>
-                    <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
-                        <div class="media block-6 services d-block text-center">
-                            <div class="d-flex justify-content-center">
-                                <div class="icon color-1 d-flex justify-content-center mb-3"><span class="align-self-center icon-bar-chart"></span></div>
-                            </div>
-                            <div class="media-body p-2 mt-3">
-                                <h3 class="heading">Visualise</h3>
-                                <p>Spatial Analysis</p>
-                            </div>
-                        </div>
+                    <div class="media-body p-2 mt-3">
+                        <h3 class="heading">Visualise</h3>
+                        <p>Spatial Analysis</p>
                     </div>
-                    <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
-                        <div class="media block-6 services d-block text-center">
-                            <div class="d-flex justify-content-center">
-                                <div class="icon color-2 d-flex justify-content-center mb-3"><span class="align-self-center icon-pencil"></span></div>
-                            </div>
-                            <div class="media-body p-2 mt-3">
-                                <h3 class="heading">Interpret</h3>
-                                <p>Attributes impact on your area</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
-                        <div class="media block-6 services d-block text-center">
-                            <div class="d-flex justify-content-center">
-                                <div class="icon color-4 d-flex justify-content-center mb-3"><span class="align-self-center icon-lightbulb-o"></span></div>
-                            </div>
-                            <div class="media-body p-2 mt-3">
-                                <h3 class="heading">Insights</h3>
-                                <p>Tends &amp; takeaways</p>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-
             </div>
-            <div class="row justify-content-right">
-                <iframe src="charts/bar%20chart_desc_avg%20price.html" scrolling="no" width="30%" height="300px" style="border:0 ;">
-                </iframe>
-            </div>
-            <div class="row justify-content-center" style='margin: 20px 20px'>
-                <iframe src="charts/bar%20chart_desc_avg%20rating.html" scrolling="no" width="90%" height="300px" style="border:0 ;">
-                </iframe>
-            </div>
-            <div class="row justify-content-center">
-                <iframe src="charts/bar%20chart_desc_total%20number.html" scrolling="no" width="900px" height="400px" style="border:0 ;">
-                </iframe>
+            <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services d-block text-center">
+                    <div class="d-flex justify-content-center">
+                        <div class="icon color-2 d-flex justify-content-center mb-3"><span class="align-self-center icon-pencil"></span></div>
+                    </div>
+                    <div class="media-body p-2 mt-3">
+                        <h3 class="heading">Interpret</h3>
+                        <p>Attributes impact on your area</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="row justify-content-center">
-                <iframe src="charts/OLS%20Model%202A.html" scrolling="no" width="800px" height="4px" style="border:0 ;">
-                </iframe>
-
+            <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services d-block text-center">
+                    <div class="d-flex justify-content-center">
+                        <div class="icon color-4 d-flex justify-content-center mb-3"><span class="align-self-center icon-lightbulb-o"></span></div>
+                    </div>
+                    <div class="media-body p-2 mt-3">
+                        <h3 class="heading">Insights</h3>
+                        <p>Tends &amp; takeaways</p>
+                    </div>
+                </div>
             </div>
-            <div class="row justify-content-center">
-                <iframe src="charts/scatter%20plot.html" scrolling="no" width="600px" height="400px" style="border:0 ;">
-                </iframe>
-            </div>
-            <iframe src="charts/line_chart.html" scrolling="no" width="600px" height="400px" style="border:0 ;">
-                                    </iframe>
+
+        </div>
+
+        </div>
+        <div class="row justify-content-right">
+            <iframe src="charts/bar%20chart_desc_avg%20price.html" scrolling="no" width="30%" height="300px" style="border:0 ;">
+            </iframe>
+        </div>
+        <div class="row justify-content-center" style='margin: 20px 20px'>
+            <iframe src="charts/bar%20chart_desc_avg%20rating.html" scrolling="no" width="90%" height="300px" style="border:0 ;">
+            </iframe>
+        </div>
+        <div class="row justify-content-center">
+            <iframe src="charts/bar%20chart_desc_total%20number.html" scrolling="no" width="900px" height="400px" style="border:0 ;">
+            </iframe>
+        </div>
+
+        <div class="row justify-content-center">
+            <iframe src="charts/OLS%20Model%202A.html" scrolling="no" width="800px" height="4px" style="border:0 ;">
+            </iframe>
+
+        </div>
+        <div class="row justify-content-center">
+            <iframe src="charts/scatter%20plot.html" scrolling="no" width="600px" height="400px" style="border:0 ;">
+            </iframe>
+        </div>
+        <iframe src="charts/line_chart.html" scrolling="no" width="600px" height="400px" style="border:0 ;">
+        </iframe>
 
 
 
-            <!-- INSERT HERE SUSAN-->
+        <!-- INSERT HERE SUSAN-->
         </div>
     </section>
 

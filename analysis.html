@@ -177,8 +177,8 @@ everytime you want to add sections with white background:
 
     <section class="ftco-section" style="margin: 5px 0; padding:0;">
 
-        <div>
-            <div id="colLeft1" style="float:left; width: 40%; padding-left: 40px">
+        <div style="margin-bottom: 50px; display:block; overflow: auto; margin-top: 30px">
+            <div id="colLeft1" style="float:left; width: 40%; padding-left: 40px; padding-top: 22px;">
                 <div class="row">
                     <div class="col-md-8 ftco-animate;">
                         <p>Add description</p>
@@ -188,7 +188,7 @@ everytime you want to add sections with white background:
             </div>
 
             <div id="colleft2" style="float: left; width: 60%">
-                <div id="row3" style= "padding-left: 10px">
+                <div id="row3" style="padding-left: 10px">
                     <iframe src="charts/boxplotscombined.html" scrolling="no" height="400px" style="border:0; position: relative; width: 100%;">
                     </iframe>
                 </div>
@@ -198,101 +198,76 @@ everytime you want to add sections with white background:
             <!--Map linked here-->
             <iframe src="leaflet.html" width="100%" height="700px" frameborder="0" scrolling="no" style="border:none ; margin: 0; overflow: hidden; display:block;">
             </iframe>
+        </div>
 
-            <!--creating 2 columns of right and left, left column has another 2 columns and 3 rows-->
+        <!--creating 2 columns of right and left, left column has another 2 columns and 3 rows-->
 
 
-            <div style="height: 1200px">
-                <div id="left" style="width: 50%; float: left; height: 1000px">
-                    <div class="row justify-content-center">
-                        <iframe src="charts/experience.html" scrolling="no" width="900px" height="1000px" style="border:0 ;">
+        <div>
+            <div id="left" style="height: 1000px">
+                <div class="row justify-content-center">
+                    <iframe src="charts/experience.html" scrolling="no" width="900px" height="1000px" style="border:0 ;">
+                    </iframe>
+                </div>
+            </div>
+            <div id="right" style="height: 800px;">
+                <div id="row1" style="width: 100%; margin-bottom: 40px; display: block; overflow: auto;">
+                    <div id="colLeft" style="width: 50%; float:left; padding: 20px">
+                        <iframe src="charts/Polaritybar.html" scrolling="no" height="300px" style="border:0; position: relative; width: 100%;">
+                        </iframe>
+                    </div>
+                    <div id="colRight" style="width: 50%; float:left">
+                        <iframe src="charts/polaritypoint.html" scrolling="no" height="300px" style="border:0; position: relative; width: 100%;">
                         </iframe>
                     </div>
                 </div>
-                <div id="right" style="width: 50%; height: 1200px; float: left">
-                    <div id="row1" style="width: 100%">
-                        <div id="colLeft" style="width: 50%; float:left;">
-                            <iframe src="charts/Polaritybar.html" scrolling="no" height="300px" style="border:0; position: relative; width: 100%;">
-                            </iframe>
-                        </div>
-                        <div id="colRight" style="width: 50%; float:left">
-                            <iframe src="charts/polaritypoint.html" scrolling="no" height="300px" style="border:0; position: relative; width: 100%;">
-                            </iframe>
-                        </div>
+                <div id="row2">
+                    <div id="colLeft" style="width: 50%; float:left; padding: 20px">
+                        <iframe src="charts/subjectivitybar.html" scrolling="no" height="300px" style="border:0; position: relative; width: 100%;">
+                        </iframe>
                     </div>
-                    <div id="row2">
-                        <div id="colLeft" style="width: 50%; float:left;">
-                            <iframe src="charts/subjectivitybar.html" scrolling="no" height="300px" style="border:0; position: relative; width: 100%;">
-                            </iframe>
-                        </div>
-                        <div id="colRight" style="width: 50%; float:left">
-                            <iframe src="charts/subjectivitypoint.html" scrolling="no" height="300px" style="border:0; position: relative; width: 100%;">
-                            </iframe>
-                        </div>
+                    <div id="colRight" style="width: 50%; float:left">
+                        <iframe src="charts/subjectivitypoint.html" scrolling="no" height="300px" style="border:0; position: relative; width: 100%;">
+                        </iframe>
                     </div>
-
                 </div>
+
             </div>
-            <div class="row no-gutters justify-content-center mb-5 pb-5">
-                <div class="col-md-7 text-center heading-section ftco-animate">
-
-
-
-
-                    <div class="row">
-                    </div>
-                    <div class="row justify-content-center">
-
-                    </div>
-
-                    <div class="row justify-content-center">
-                        <div class="row justify-content-center;" style='margin: 0 50px'>
-
-                            <div class="row justify-content-center" style='margin: 0 20px'>
-
-                            </div>
-                        </div>
-                        <div class="row justify-content-center" style='margin: 0 20px'>
-
-                        </div>
-                        <div class="row justify-content-center" style='margin: 0 20px'>
-
-                        </div>
-                    </div>
-
-                    <div class="row mt-3">
-                        <div class="col-md-4 ftco-animate">
-                            <ul class="list-services">
-                                <li>
-                                    <h3>#1 Regression Models</h3>
-                                </li>
-                                <li>Neighbourhood on affecting Rating </li>
-                                <li>Socio-economic and demographic impacts on average Airbnb price</li>
-                                <li>Random Forest Regression</li>
-                            </ul>
-                            <p>Ordinary Least Squares Multivariate Linear Regression with Stepwise Selection and VIF Variable Selection </p>
-                        </div>
-                        <div class="col-md-4 ftco-animate">
-                            <ul class="list-services">
-                                <li>
-                                    <h3>#2 K-Means Clustering Algorithm</h3>
-                                </li>
-                            </ul>
-                            <p>Geodemographic Classification of London’s Neighbourhoods Using Airbnb Data</p>
-                        </div>
-                        <div class="col-md-4 ftco-animate">
-                            <ul class="list-services">
-                                <li>
-                                    <h3>#3 Sentiment Analysis</h3>
-                                </li>
-                                <li>Natural Language Processing</li>
-                                <li>Pre-processing</li>
-                                <li>Word Clouds</li>
-                                <li>Lemmatization with TextBlob Package</li>
-                            </ul>
-                            <p>Lexicon-based approach developed to extract polarity and subjectivity scores.</p>
-                        </div>
-                        <!-- <div class="col-md-4 ftco-animate">
+        </div>
+        <div class="container-fluid" style= "padding: 0 30px" >
+            <div class="row">
+                <div class="col-md-4 ftco-animate">
+                    <ul class="list-services">
+                        <li>
+                            <h3>#1 Regression Models</h3>
+                        </li>
+                        <li>Neighbourhood on affecting Rating </li>
+                        <li>Socio-economic and demographic impacts on average Airbnb price</li>
+                        <li>Random Forest Regression</li>
+                    </ul>
+                    <p>Ordinary Least Squares Multivariate Linear Regression with Stepwise Selection and VIF Variable Selection </p>
+                </div>
+                <div class="col-md-4 ftco-animate">
+                    <ul class="list-services">
+                        <li>
+                            <h3>#2 K-Means Clustering Algorithm</h3>
+                        </li>
+                    </ul>
+                    <p>Geodemographic Classification of London’s Neighbourhoods Using Airbnb Data</p>
+                </div>
+                <div class="col-md-4 ftco-animate">
+                    <ul class="list-services">
+                        <li>
+                            <h3>#3 Sentiment Analysis</h3>
+                        </li>
+                        <li>Natural Language Processing</li>
+                        <li>Pre-processing</li>
+                        <li>Word Clouds</li>
+                        <li>Lemmatization with TextBlob Package</li>
+                    </ul>
+                    <p>Lexicon-based approach developed to extract polarity and subjectivity scores.</p>
+                </div>
+                <!-- <div class="col-md-4 ftco-animate">
                     <ul class="list-services">
                       <li><h3>#4 Add text</h3></li>
                       <li><a href="#">Product Strategy</a></li>
@@ -319,11 +294,8 @@ everytime you want to add sections with white background:
                     </ul>
                     <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
                   </div> -->
-                    </div>
-
-                    <div class="container">
-
-                    </div>
+            </div>
+        </div>
     </section>
 
 

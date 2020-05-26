@@ -1,316 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-   <script src="https://code.highcharts.com/highcharts.js"></script>
-   <script src="https://code.highcharts.com/highcharts-more.js"></script>
-   <script src="https://code.highcharts.com/modules/exporting.js"></script>
-   <script src="https://code.highcharts.com/modules/export-data.js"></script>
-   <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-   <script src="https://code.highcharts.com/themes/high-contrast-light.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/themes/high-contrast-light.js"></script>
 
-<figure class="highcharts-figure">
-    <div id="container" style="width: 700xp"></div>
-</figure>
+    <figure class="highcharts-figure">
+        <div id="container" style="width: 700xp"></div>
+    </figure>
 
     <title>boxplot</title>
 </head>
+
 <body>
-<script language="JavaScript">
-// Define custom series type for displaying low/med/high values using boxplot as a base
-Highcharts.seriesType('lowmedhigh', 'boxplot', {
-    keys: ['low', 'median', 'high'],
-    tooltip: {
-        pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: ' +
-            'Low <b>{point.low}</b> - Median <b>{point.median}</b> - High <b>{point.high}</b><br/>'
-    }
-}, {
-    // Change point shape to a line with three crossing lines for low/median/high
-    // Stroke width is hardcoded to 1 for simplicity
-    drawPoints: function () {
-        var series = this;
-        Highcharts.each(this.points, function (point) {
-            var graphic = point.graphic,
-                verb = graphic ? 'animate' : 'attr',
-                shapeArgs = point.shapeArgs,
-                width = shapeArgs.width,
-                left = Math.floor(shapeArgs.x) + 0.5,
-                right = left + width,
-                crispX = left + Math.round(width / 2) + 0.5,
-                highPlot = Math.floor(point.highPlot) + 0.5,
-                medianPlot = Math.floor(point.medianPlot) + 0.5,
-                lowPlot = Math.floor(point.lowPlot) + 0.5 - (point.low === 0 ? 1 : 0); // Sneakily draw low marker even if 0
-
-            if (point.isNull) {
-                return;
+    <script language="JavaScript">
+        // Define custom series type for displaying low/med/high values using boxplot as a base
+        Highcharts.seriesType('lowmedhigh', 'boxplot', {
+            keys: ['low', 'median', 'high'],
+            tooltip: {
+                pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: ' +
+                    'Low <b>{point.low}</b> - Median <b>{point.median}</b> - High <b>{point.high}</b><br/>'
             }
+        }, {
+            // Change point shape to a line with three crossing lines for low/median/high
+            // Stroke width is hardcoded to 1 for simplicity
+            drawPoints: function() {
+                var series = this;
+                Highcharts.each(this.points, function(point) {
+                    var graphic = point.graphic,
+                        verb = graphic ? 'animate' : 'attr',
+                        shapeArgs = point.shapeArgs,
+                        width = shapeArgs.width,
+                        left = Math.floor(shapeArgs.x) + 0.5,
+                        right = left + width,
+                        crispX = left + Math.round(width / 2) + 0.5,
+                        highPlot = Math.floor(point.highPlot) + 0.5,
+                        medianPlot = Math.floor(point.medianPlot) + 0.5,
+                        lowPlot = Math.floor(point.lowPlot) + 0.5 - (point.low === 0 ? 1 : 0); // Sneakily draw low marker even if 0
 
-            if (!graphic) {
-                point.graphic = graphic = series.chart.renderer.path('point').add(series.group);
+                    if (point.isNull) {
+                        return;
+                    }
+
+                    if (!graphic) {
+                        point.graphic = graphic = series.chart.renderer.path('point').add(series.group);
+                    }
+
+                    graphic.attr({
+                        stroke: point.color || series.color,
+                        "stroke-width": 1
+                    });
+
+                    graphic[verb]({
+                        d: [
+                            'M', left, highPlot,
+                            'H', right,
+                            'M', left, medianPlot,
+                            'H', right,
+                            'M', left, lowPlot,
+                            'H', right,
+                            'M', crispX, highPlot,
+                            'V', lowPlot
+                        ]
+                    });
+                });
             }
-
-            graphic.attr({
-                stroke: point.color || series.color,
-                "stroke-width": 1
-            });
-
-            graphic[verb]({
-                d: [
-                    'M', left, highPlot,
-                    'H', right,
-                    'M', left, medianPlot,
-                    'H', right,
-                    'M', left, lowPlot,
-                    'H', right,
-                    'M', crispX, highPlot,
-                    'V', lowPlot
-                ]
-            });
         });
-    }
-});
 
-// Create chart
-var chart = Highcharts.chart('container', {
-    chart: {
-	   renderTo: 'container',
-       type: 'lowmedhigh'
-    },
+        // Create chart
+        var chart = Highcharts.chart('container', {
+                    chart: {
+                        renderTo: 'container',
+                        type: 'lowmedhigh'
+                    },
+                    accessibility: {
+                        enabled: false,
+                        keyboardNavigation: {
+                            enabled: false,
+                            focusBorder: {
+                                enabled: false
+                            }
+                        }
+                    },
 
-    title: {
-        text: 'Polarity and Subjectivity of Reviews'
-    },
-	colors: ['#527a7a','#adad85','#d9b38c','#737373'],
-    credits:{
-      enabled: false
-    },
-	navigation: {
-        buttonOptions: {
-            enabled: false
-        }
-    },
-    accessibility: {
-        point: {
-            descriptionFormatter: function (point) {
-                // Use default formatter for null points
-                if (point.isNull) {
-                    return false;
-                }
+                        title: {
+                            text: 'Polarity and Subjectivity of Reviews'
+                        },
+                        colors: ['#527a7a', '#adad85', '#d9b38c', '#737373'],
+                        credits: {
+                            enabled: false
+                        },
+                        navigation: {
+                            buttonOptions: {
+                                enabled: false
+                            }
+                        },
+                        accessibility: {
+                            point: {
+                                descriptionFormatter: function(point) {
+                                    // Use default formatter for null points
+                                    if (point.isNull) {
+                                        return false;
+                                    }
 
-                return point.category + ', low ' + Highcharts.numberFormat(Math.abs(point.low),3) + ', median ' +
-                    Highcharts.numberFormat(Math.abs(point.median),3) + ', high ' + Highcharts.numberFormat(Math.abs(point.median),3);
-            }
-        },
+                                    return point.category + ', low ' + Highcharts.numberFormat(Math.abs(point.low), 3) + ', median ' +
+                                        Highcharts.numberFormat(Math.abs(point.median), 3) + ', high ' + Highcharts.numberFormat(Math.abs(point.median), 3);
+                                }
+                            },
 
-        series: {
-            descriptionFormatter: function (series) {
-                return series.name + ', series ' + (series.index + 1) + ' of ' +
-                    series.chart.series.length + ' with ' + series.points.length +
-                    ' data points.';
-            }
-        },
+                            series: {
+                                descriptionFormatter: function(series) {
+                                    return series.name + ', series ' + (series.index + 1) + ' of ' +
+                                        series.chart.series.length + ' with ' + series.points.length +
+                                        ' data points.';
+                                }
+                            },
 
-        typeDescription: 'Low, median, high. Each data point has a low, median and high value, depicted vertically as small ticks.' // Describe the chart type to screen reader users, since this is not a traditional boxplot chart
-    },
+                            typeDescription: 'Low, median, high. Each data point has a low, median and high value, depicted vertically as small ticks.' // Describe the chart type to screen reader users, since this is not a traditional boxplot chart
+                        },
 
-    xAxis: [{
-        accessibility: {
-            description: 'Months of the year'
-        },
-        categories: ['Barking and Dagenham', 'Barnet', 'Bexley', 'Brent', 'Bromley', 'Camden', 'City of London', 'Croydon', 'Ealing', 'Enfield', 'Greenwich', 'Hackney','Hammersmith and Fulham','Haringey','Harrow','Havering',
-					'Hillingdon','Hounslow','Islington','Kensington and Chelsea','Kingston upon Thames','Lambeth','Lewisham','Merton','Newham','Redbridge','Richmond upon Thames','Southwark','Sutton','Tower Hamlets','Waltham Forest','Wandsworth','Westminster']
-    }],
+                        xAxis: [{
+                            accessibility: {
+                                description: 'Months of the year'
+                            },
+                            categories: ['Barking and Dagenham', 'Barnet', 'Bexley', 'Brent', 'Bromley', 'Camden', 'City of London', 'Croydon', 'Ealing', 'Enfield', 'Greenwich', 'Hackney', 'Hammersmith and Fulham', 'Haringey', 'Harrow', 'Havering',
+                                'Hillingdon', 'Hounslow', 'Islington', 'Kensington and Chelsea', 'Kingston upon Thames', 'Lambeth', 'Lewisham', 'Merton', 'Newham', 'Redbridge', 'Richmond upon Thames', 'Southwark', 'Sutton', 'Tower Hamlets', 'Waltham Forest', 'Wandsworth', 'Westminster'
+                            ]
+                        }],
 
-    yAxis: {
-        title: {
-            text: 'Polarity or Subjectivity'
-        },
-        min: 0
-    },
+                        yAxis: {
+                            title: {
+                                text: 'Polarity or Subjectivity'
+                            },
+                            min: 0
+                        },
 
-    responsive: {
-        rules: [{
-            condition: {
-                maxWidth: 550
-            },
-            chartOptions: {
-                xAxis: {
-                    categories: ['Barking and Dagenham', 'Barnet', 'Bexley', 'Brent', 'Bromley', 'Camden', 'City of London', 'Croydon', 'Ealing', 'Enfield', 'Greenwich', 'Hackney','Hammersmith and Fulham','Haringey','Harrow','Havering',
-					'Hillingdon','Hounslow','Islington','Kensington and Chelsea','Kingston upon Thames','Lambeth','Lewisham','Merton','Newham','Redbridge','Richmond upon Thames','Southwark','Sutton','Tower Hamlets','Waltham Forest','Wandsworth','Westminster']
-                }
-            }
-        }]
-    },
+                        responsive: {
+                            rules: [{
+                                condition: {
+                                    maxWidth: 550
+                                },
+                                chartOptions: {
+                                    xAxis: {
+                                        categories: ['Barking and Dagenham', 'Barnet', 'Bexley', 'Brent', 'Bromley', 'Camden', 'City of London', 'Croydon', 'Ealing', 'Enfield', 'Greenwich', 'Hackney', 'Hammersmith and Fulham', 'Haringey', 'Harrow', 'Havering',
+                                            'Hillingdon', 'Hounslow', 'Islington', 'Kensington and Chelsea', 'Kingston upon Thames', 'Lambeth', 'Lewisham', 'Merton', 'Newham', 'Redbridge', 'Richmond upon Thames', 'Southwark', 'Sutton', 'Tower Hamlets', 'Waltham Forest', 'Wandsworth', 'Westminster'
+                                        ]
+                                    }
+                                }
+                            }]
+                        },
 
-    tooltip: {
-        shared: true
-    },
+                        tooltip: {
+                            shared: true
+                        },
 
-    plotOptions: {
-        series: {
-            stickyTracking: true,
-            whiskerWidth: 5
-        }
-    },
+                        plotOptions: {
+                            series: {
+                                stickyTracking: true,
+                                whiskerWidth: 5
+                            }
+                        },
 
-    series: [{
-        name: 'Guest Polarity',
-        data: [
-            [0.154242424,0.35,0.5],
-            [0.25,0.383333333,0.5],
-            [0.262797619,0.4,0.525],
-            [0.207407407,0.366666667,0.5],
-            [0.2625,0.39375,0.522222222],
-            [0.222619048,0.366666667,0.5],
-            [0.21224026,0.360416667,0.5],
-            [0.249112812,0.385333333,0.516666667],
-            [0.255636837,0.3875,0.513888889],
-            [0.249747621,0.388888889,0.522222222],
-            [0.26937415,0.4,0.520606061],
-            [0.266666667,0.388888889,0.502083333],
-            [0.240059524,0.372222222,0.5],
-            [0.26,0.388888889,0.505555556],
-            [0.28130787,0.4,0.533333333],
-            [0.275,0.40547619,0.566666667],
-            [0.283333333,0.408333333,0.54375],
-            [0.281222003,0.401388889,0.53],
-            [0.233333333,0.367948718,0.5],
-            [0.233928571,0.3725,0.5],
-            [0.288784722,0.403726852,0.525],
-            [0.218560606,0.366666667,0.5],
-            [0.233766234,0.370833333,0.5],
-            [0.288888889,0.40625,0.533333333],
-            [0.214663462,0.372,0.5],
-            [0.244444444,0.383333333,0.511111111],
-            [0.301388889,0.416666667,0.541666667],
-            [0.218687075,0.366666667,0.5],
-            [0.2875,0.4125,0.543518519],
-            [0.20625,0.366666667,0.5],
-            [0.244444444,0.377506614,0.5],
-            [0.262031688,0.391666667,0.511111111],
-            [0.2,0.357777778,0.5]
-        ]
-    }, {
-        name: 'Host Polarity',
-        data: [
-            [0,0.116666667,0.36875],
-            [0,0.1625,0.302777778],
-            [0.182936508,0.215625,0.288888889],
-            [0.059090909,0.243333333,0.375],
-            [0,0.1875,0.306802721],
-            [0,0.183333333,0.308727679],
-            [0,0.216666667,0.325595238],
-            [0,0.177777778,0.262865646],
-            [0,0.128333333,0.275],
-            [0,0.115757576,0.25],
-            [0,0.193141946,0.35],
-            [0,0.253125,0.365789474],
-            [0.03,0.215,0.333333333],
-            [0,0.191666667,0.342857143],
-            [0,0.133333333,0.368333333],
-            [0,0.118095238,0.25],
-            [0,0.2,0.256986416],
-            [0,0.213005051,0.331944444],
-            [0,0.186666667,0.3],
-            [0,0.24375,0.331096681],
-            [0,0.25,0.336428571],
-            [0.008333333,0.1875,0.314393939],
-            [0.003125,0.170833333,0.292857143],
-            [0,0.130208333,0.305714286],
-            [0,0.153703704,0.2625],
-            [0,0.125,0.303333333],
-            [0,0.218055556,0.33125],
-            [0.002272727,0.21,0.318418561],
-            [0.147619048,0.306666667,0.408333333],
-            [0,0.221590909,0.346],
-            [0.046428571,0.198026316,0.366666667],
-            [0,0.16,0.301298701],
-            [0,0.175555556,0.325]
+                        series: [{
+                            name: 'Guest Polarity',
+                            data: [
+                                [0.154242424, 0.35, 0.5],
+                                [0.25, 0.383333333, 0.5],
+                                [0.262797619, 0.4, 0.525],
+                                [0.207407407, 0.366666667, 0.5],
+                                [0.2625, 0.39375, 0.522222222],
+                                [0.222619048, 0.366666667, 0.5],
+                                [0.21224026, 0.360416667, 0.5],
+                                [0.249112812, 0.385333333, 0.516666667],
+                                [0.255636837, 0.3875, 0.513888889],
+                                [0.249747621, 0.388888889, 0.522222222],
+                                [0.26937415, 0.4, 0.520606061],
+                                [0.266666667, 0.388888889, 0.502083333],
+                                [0.240059524, 0.372222222, 0.5],
+                                [0.26, 0.388888889, 0.505555556],
+                                [0.28130787, 0.4, 0.533333333],
+                                [0.275, 0.40547619, 0.566666667],
+                                [0.283333333, 0.408333333, 0.54375],
+                                [0.281222003, 0.401388889, 0.53],
+                                [0.233333333, 0.367948718, 0.5],
+                                [0.233928571, 0.3725, 0.5],
+                                [0.288784722, 0.403726852, 0.525],
+                                [0.218560606, 0.366666667, 0.5],
+                                [0.233766234, 0.370833333, 0.5],
+                                [0.288888889, 0.40625, 0.533333333],
+                                [0.214663462, 0.372, 0.5],
+                                [0.244444444, 0.383333333, 0.511111111],
+                                [0.301388889, 0.416666667, 0.541666667],
+                                [0.218687075, 0.366666667, 0.5],
+                                [0.2875, 0.4125, 0.543518519],
+                                [0.20625, 0.366666667, 0.5],
+                                [0.244444444, 0.377506614, 0.5],
+                                [0.262031688, 0.391666667, 0.511111111],
+                                [0.2, 0.357777778, 0.5]
+                            ]
+                        }, {
+                            name: 'Host Polarity',
+                            data: [
+                                [0, 0.116666667, 0.36875],
+                                [0, 0.1625, 0.302777778],
+                                [0.182936508, 0.215625, 0.288888889],
+                                [0.059090909, 0.243333333, 0.375],
+                                [0, 0.1875, 0.306802721],
+                                [0, 0.183333333, 0.308727679],
+                                [0, 0.216666667, 0.325595238],
+                                [0, 0.177777778, 0.262865646],
+                                [0, 0.128333333, 0.275],
+                                [0, 0.115757576, 0.25],
+                                [0, 0.193141946, 0.35],
+                                [0, 0.253125, 0.365789474],
+                                [0.03, 0.215, 0.333333333],
+                                [0, 0.191666667, 0.342857143],
+                                [0, 0.133333333, 0.368333333],
+                                [0, 0.118095238, 0.25],
+                                [0, 0.2, 0.256986416],
+                                [0, 0.213005051, 0.331944444],
+                                [0, 0.186666667, 0.3],
+                                [0, 0.24375, 0.331096681],
+                                [0, 0.25, 0.336428571],
+                                [0.008333333, 0.1875, 0.314393939],
+                                [0.003125, 0.170833333, 0.292857143],
+                                [0, 0.130208333, 0.305714286],
+                                [0, 0.153703704, 0.2625],
+                                [0, 0.125, 0.303333333],
+                                [0, 0.218055556, 0.33125],
+                                [0.002272727, 0.21, 0.318418561],
+                                [0.147619048, 0.306666667, 0.408333333],
+                                [0, 0.221590909, 0.346],
+                                [0.046428571, 0.198026316, 0.366666667],
+                                [0, 0.16, 0.301298701],
+                                [0, 0.175555556, 0.325]
 
-        ]
-    },{
-	name: 'Guest Subjectivity ',
-        data: [
-            [0.454103535,0.6,0.722222222],
-            [0.5,0.6125,0.722222222],
-            [0.505555556,0.633333333,0.741666667],
-            [0.475,0.6,0.7125],
-            [0.5,0.618333333,0.729002193],
-            [0.475,0.594166667,0.7],
-            [0.464456845,0.582614087,0.7],
-            [0.5,0.620378788,0.733333333],
-            [0.503137401,0.619047619,0.727777778],
-            [0.5,0.61780102,0.733333333],
-            [0.506666667,0.62375,0.733333333],
-            [0.503571429,0.610833333,0.7125],
-            [0.49,0.6,0.70836039],
-            [0.5,0.617058824,0.725],
-            [0.516666667,0.628,0.74],
-            [0.5125,0.636666667,0.75],
-            [0.52,0.633333333,0.75],
-            [0.524160562,0.630208333,0.743927369],
-            [0.478571429,0.595833333,0.7],
-            [0.492222222,0.6,0.711111111],
-            [0.524078283,0.631281566,0.734047619],
-            [0.475,0.6,0.704166667],
-            [0.483333333,0.6,0.708333333],
-            [0.522727273,0.627638889,0.741666667],
-            [0.483333333,0.603125,0.722222222],
-            [0.5,0.6125,0.725],
-            [0.535416667,0.6375,0.748645833],
-            [0.475,0.6,0.703817016],
-            [0.51875,0.637301587,0.75],
-            [0.473809524,0.6,0.706335227],
-            [0.492797619,0.60772873,0.716477273],
-            [0.500863095,0.616666667,0.723779762],
-            [0.464583333,0.589223058,0.7]
-        ]
-    }, {
-        name: 'Host Subjectivity',
-        data: [
-            [0,0.37016317,0.55],
-            [0.275,0.428373016,0.547435897],
-            [0.376984127,0.45,0.5],
-            [0.325,0.428373016,0.533333333],
-            [0.235555556,0.423787879,0.515555556],
-            [0,0.3975,0.530833333],
-            [0,0.4125,0.514880952],
-            [0,0.402913753,0.508333333],
-            [0,0.366666667,0.476470588],
-            [0.240416667,0.381175595,0.4875],
-            [0.257857143,0.433333333,0.575],
-            [0.270833333,0.471180556,0.572916667],
-            [0.291666667,0.439719888,0.555],
-            [0.286111111,0.417171717,0.559375],
-            [0,0.39537037,0.55],
-            [0.166666667,0.328333333,0.5],
-            [0.308333333,0.419047619,0.536813187],
-            [0,0.433333333,0.556555556],
-            [0.243506494,0.4040625,0.521],
-            [0.175,0.476923077,0.605555556],
-            [0.222222222,0.485,0.540740741],
-            [0.23,0.432222222,0.536666667],
-            [0.265734266,0.416666667,0.51208134],
-            [0.213392857,0.447619048,0.543095238],
-            [0.093333333,0.382410714,0.5],
-            [0,0.38,0.50212963],
-            [0.3,0.452930403,0.558],
-            [0.241666667,0.427083333,0.515740741],
-            [0.347222222,0.5,0.513333333],
-            [0.2625,0.454389881,0.571794872],
-            [0.2375,0.444057971,0.554761905],
-            [0.236666667,0.452048701,0.55],
-            [0.15625,0.426190476,0.556111111],
-        ]
-    }]
-});
+                            ]
+                        }, {
+                            name: 'Guest Subjectivity ',
+                            data: [
+                                [0.454103535, 0.6, 0.722222222],
+                                [0.5, 0.6125, 0.722222222],
+                                [0.505555556, 0.633333333, 0.741666667],
+                                [0.475, 0.6, 0.7125],
+                                [0.5, 0.618333333, 0.729002193],
+                                [0.475, 0.594166667, 0.7],
+                                [0.464456845, 0.582614087, 0.7],
+                                [0.5, 0.620378788, 0.733333333],
+                                [0.503137401, 0.619047619, 0.727777778],
+                                [0.5, 0.61780102, 0.733333333],
+                                [0.506666667, 0.62375, 0.733333333],
+                                [0.503571429, 0.610833333, 0.7125],
+                                [0.49, 0.6, 0.70836039],
+                                [0.5, 0.617058824, 0.725],
+                                [0.516666667, 0.628, 0.74],
+                                [0.5125, 0.636666667, 0.75],
+                                [0.52, 0.633333333, 0.75],
+                                [0.524160562, 0.630208333, 0.743927369],
+                                [0.478571429, 0.595833333, 0.7],
+                                [0.492222222, 0.6, 0.711111111],
+                                [0.524078283, 0.631281566, 0.734047619],
+                                [0.475, 0.6, 0.704166667],
+                                [0.483333333, 0.6, 0.708333333],
+                                [0.522727273, 0.627638889, 0.741666667],
+                                [0.483333333, 0.603125, 0.722222222],
+                                [0.5, 0.6125, 0.725],
+                                [0.535416667, 0.6375, 0.748645833],
+                                [0.475, 0.6, 0.703817016],
+                                [0.51875, 0.637301587, 0.75],
+                                [0.473809524, 0.6, 0.706335227],
+                                [0.492797619, 0.60772873, 0.716477273],
+                                [0.500863095, 0.616666667, 0.723779762],
+                                [0.464583333, 0.589223058, 0.7]
+                            ]
+                        }, {
+                            name: 'Host Subjectivity',
+                            data: [
+                                [0, 0.37016317, 0.55],
+                                [0.275, 0.428373016, 0.547435897],
+                                [0.376984127, 0.45, 0.5],
+                                [0.325, 0.428373016, 0.533333333],
+                                [0.235555556, 0.423787879, 0.515555556],
+                                [0, 0.3975, 0.530833333],
+                                [0, 0.4125, 0.514880952],
+                                [0, 0.402913753, 0.508333333],
+                                [0, 0.366666667, 0.476470588],
+                                [0.240416667, 0.381175595, 0.4875],
+                                [0.257857143, 0.433333333, 0.575],
+                                [0.270833333, 0.471180556, 0.572916667],
+                                [0.291666667, 0.439719888, 0.555],
+                                [0.286111111, 0.417171717, 0.559375],
+                                [0, 0.39537037, 0.55],
+                                [0.166666667, 0.328333333, 0.5],
+                                [0.308333333, 0.419047619, 0.536813187],
+                                [0, 0.433333333, 0.556555556],
+                                [0.243506494, 0.4040625, 0.521],
+                                [0.175, 0.476923077, 0.605555556],
+                                [0.222222222, 0.485, 0.540740741],
+                                [0.23, 0.432222222, 0.536666667],
+                                [0.265734266, 0.416666667, 0.51208134],
+                                [0.213392857, 0.447619048, 0.543095238],
+                                [0.093333333, 0.382410714, 0.5],
+                                [0, 0.38, 0.50212963],
+                                [0.3, 0.452930403, 0.558],
+                                [0.241666667, 0.427083333, 0.515740741],
+                                [0.347222222, 0.5, 0.513333333],
+                                [0.2625, 0.454389881, 0.571794872],
+                                [0.2375, 0.444057971, 0.554761905],
+                                [0.236666667, 0.452048701, 0.55],
+                                [0.15625, 0.426190476, 0.556111111],
+                            ]
+                        }]
+                    });
 
 
-// Remove click events on container to avoid having "clickable" announced by AT
-// These events are needed for custom click events, drag to zoom, and navigator
-// support.
-chart.container.onmousedown = null;
-chart.container.onclick = null;
-</script>
+                // Remove click events on container to avoid having "clickable" announced by AT
+                // These events are needed for custom click events, drag to zoom, and navigator
+                // support.
+                chart.container.onmousedown = null; chart.container.onclick = null;
+
+    </script>
 </body>
+
 </html>
