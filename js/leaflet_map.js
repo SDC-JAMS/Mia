@@ -3,7 +3,7 @@
 //  set Leaflet
 var map = L.mapbox.map('mapid')
     .setView([51.509865, -0.118092], 11);
-
+map.scrollWheelZoom.disable();
 
 L.tileLayer('https://api.mapbox.com/styles/v1/miadibe/ckaffoouw0d1y1il9m090hc52/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibWlhZGliZSIsImEiOiJjazVwOWw3ZXowdDhjM2xuc3U3cGN3NGxwIn0.aYf9qdTxNVl9igxiN-NnIA', {
     maxZoom: 15,
