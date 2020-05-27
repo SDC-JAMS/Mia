@@ -6,64 +6,66 @@
 <canvas id="bar-chart-horizontal" width="500" height="300"></canvas>
 
 <script>
-new Chart(document.getElementById("bar-chart-horizontal"), {
-    type: 'horizontalBar',
-    data: {
-      labels: ["Westminster", "Tower Hamlets", "Camden", "Kensington and Chelsea", "Southwark","Hackney","Lambeth","Hammersmith","Islington"],
-      datasets: [
-        {
-          label: "Total Listings",
-          backgroundColor: [
-              'rgba(0, 99, 132, 0.6)',
-              'rgba(30, 99, 132, 0.6)',
-              'rgba(60, 99, 132, 0.6)',
-              'rgba(90, 99, 132, 0.6)',
-              'rgba(120, 99, 132, 0.6)',
-              'rgba(150, 99, 132, 0.6)',
-              'rgba(180, 99, 132, 0.6)',
-              'rgba(210, 99, 132, 0.6)',
-              'rgba(240, 99, 132, 0.6)',
-              'rgba(270, 99, 132, 0.6)'
-  ],
-          borderColor:[
-              'rgba(0, 99, 132, 1)',
-              'rgba(30, 99, 132, 1)',
-              'rgba(60, 99, 132, 1)',
-              'rgba(90, 99, 132, 1)',
-              'rgba(120, 99, 132, 1)',
-              'rgba(150, 99, 132, 1)',
-              'rgba(180, 99, 132, 1)',
-              'rgba(210, 99, 132, 1)',
-              'rgba(240, 99, 132, 1)',
-              'rgba(270, 99, 132, 1)'
-  ],
-          borderWidth:2,
-          hoverBorderWidth: 3,
-          data: [5134,3821, 3195, 2868, 2222, 2156, 2148, 2012, 2012],
-          barThickness:6,
-          maxBarThickness:8,
-          barPercentage:2,
+    Chart.defaults.global.defaultFontFamily = '"Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
+    new Chart(document.getElementById("bar-chart-horizontal"), {
+        type: 'horizontalBar',
+        data: {
+            labels: ["Westminster", "Tower Hamlets", "Camden", "Kensington and Chelsea", "Southwark", "Hackney", "Lambeth", "Hammersmith", "Islington"],
+            datasets: [{
+                label: "Total Listings",
+                backgroundColor: [
+                    'rgba(0, 99, 132, 0.6)',
+                    'rgba(30, 99, 132, 0.6)',
+                    'rgba(60, 99, 132, 0.6)',
+                    'rgba(90, 99, 132, 0.6)',
+                    'rgba(120, 99, 132, 0.6)',
+                    'rgba(150, 99, 132, 0.6)',
+                    'rgba(180, 99, 132, 0.6)',
+                    'rgba(210, 99, 132, 0.6)',
+                    'rgba(240, 99, 132, 0.6)',
+                    'rgba(270, 99, 132, 0.6)'
+                ],
+                borderColor: [
+                    'rgba(0, 99, 132, 1)',
+                    'rgba(30, 99, 132, 1)',
+                    'rgba(60, 99, 132, 1)',
+                    'rgba(90, 99, 132, 1)',
+                    'rgba(120, 99, 132, 1)',
+                    'rgba(150, 99, 132, 1)',
+                    'rgba(180, 99, 132, 1)',
+                    'rgba(210, 99, 132, 1)',
+                    'rgba(240, 99, 132, 1)',
+                    'rgba(270, 99, 132, 1)'
+                ],
+                borderWidth: 2,
+                hoverBorderWidth: 3,
+                data: [5134, 3821, 3195, 2868, 2222, 2156, 2148, 2012, 2012],
+                barThickness: 6,
+                maxBarThickness: 8,
+                barPercentage: 2,
+            }]
+        },
+        options: {
+            legend: {
+                display: true
+            },
+            title: {
+                fontStyle:'normal',
+                display: true,
+                text: 'Top 10 London Neighbourhoods with Highest Number of Listings'
+            },
+            animation: {
+                duration: 2000
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                    offset: false
+                }]
+            }
         }
-      ]
-    },
-    options: {
-      legend: { display: true },
-      title: {
-        display: true,
-        text: 'Top 10 London Neighbourhoods with Highest Number of Listings'
-      },
-      animation:{
-        duration: 2000
-      },
-      scales:{
-          xAxes:[{
-              ticks:{
-                  beginAtZero: true
-              },
-          offset:false
-          }]
-      }
-    }
-});
+    });
 
 </script>
