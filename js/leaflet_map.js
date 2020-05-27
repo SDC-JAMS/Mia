@@ -21,6 +21,9 @@ $.getJSON(url_sentiment, function (json) {
 
     var guest_polarity_array = [];
 
+     //  Covert the polygon feautures in WKT string from database to geoJSON object
+    // https://gis.stackexchange.com/questions/162842/convert-wkt-to-geojson-with-leaflet
+
     var wkt = new Wkt.Wkt()
 
     json.forEach(function (layer) {
@@ -58,20 +61,16 @@ $.getJSON(url_sentiment, function (json) {
                 fillOpacity: 0.9
             }
 
-/*            var popup = 'Borough:' + feature.properties.neighbourhood + '<p>' + 'Price:' + Math.floor(feature.properties.airbnb_price_price) + ' pounds' + '</p>'*/
             var img = '<img src="' + feature.properties.Link + '">';
             var popup = "<b>Location Description: </b>" + feature.properties.neighbourhood + "<br>" +
                 "<b>Avg. Guest Polarity: </b>" + feature.properties.guestpolarity_mean.toFixed(2) + "<br>" +
-/*                                "<b>Graffiti Type: </b>" + entry[5] + "<br>" +
-                                "<b>Graffiti Material: </b>" + entry[6] + "<br>" +*/
-                "<b>Word-Cloud: </b><a href='" + 'http://www.google.com' + "' target=\"_blank\">" + img +  "</a>"
+                "<b>Word-Cloud: </b>" + img +  "</a>"
 
 
-        /*  layer.bindPopup('Borough:' + feature.properties.neighbourhood + '<p>' + 'Price:' + Math.floor(feature.properties.airbnb_price_price) + 'pounds' + '</p>'),*/
             layer.bindTooltip(popup),
             layer.on('mouseover', function () {
                 this.setStyle({
-                    color: 'red'   //or whatever style you wish to use;
+                    color: 'red'   //for the boundary line when hover
                 });
             });
             layer.on('mouseout', function () {
@@ -140,20 +139,16 @@ $.getJSON(url_sentiment, function (json) {
                 fillOpacity: 0.9
             }
 
-            /*            var popup = 'Borough:' + feature.properties.neighbourhood + '<p>' + 'Price:' + Math.floor(feature.properties.airbnb_price_price) + ' pounds' + '</p>'*/
             var img = '<img src="' + feature.properties.Link + '">';
             var popup = "<b>Location Description: </b>" + feature.properties.neighbourhood + "<br>" +
                 "<b>Avg. Host Polarity: </b>" + feature.properties.hostpolarity_mean.toFixed(2) + "<br>" +
-                /*                                "<b>Graffiti Type: </b>" + entry[5] + "<br>" +
-                                                "<b>Graffiti Material: </b>" + entry[6] + "<br>" +*/
-                "<b>Word-Cloud: </b><a href='" + 'http://www.google.com' + "' target=\"_blank\">" + img + "</a>"
+                "<b>Word-Cloud: </b>" + img + "</a>"
 
 
-            /*  layer.bindPopup('Borough:' + feature.properties.neighbourhood + '<p>' + 'Price:' + Math.floor(feature.properties.airbnb_price_price) + 'pounds' + '</p>'),*/
             layer.bindTooltip(popup),
                 layer.on('mouseover', function () {
                     this.setStyle({
-                        color: 'red'   //or whatever style you wish to use;
+                        color: 'red'   //for the boundary line when hover
                     });
                 });
             layer.on('mouseout', function () {
@@ -222,20 +217,16 @@ $.getJSON(url_sentiment, function (json) {
                 fillOpacity: 0.9
             }
 
-            /*            var popup = 'Borough:' + feature.properties.neighbourhood + '<p>' + 'Price:' + Math.floor(feature.properties.airbnb_price_price) + ' pounds' + '</p>'*/
+
             var img = '<img src="' + feature.properties.Link + '">';
             var popup = "<b>Location Description: </b>" + feature.properties.neighbourhood + "<br>" +
                 "<b>Avg. Guest Subjectivity: </b>" + feature.properties.guestsubjectivity_mean.toFixed(2) + "<br>" +
-                /*                                "<b>Graffiti Type: </b>" + entry[5] + "<br>" +
-                                                "<b>Graffiti Material: </b>" + entry[6] + "<br>" +*/
-                "<b>Word-Cloud: </b><a href='" + 'http://www.google.com' + "' target=\"_blank\">" + img + "</a>"
+                "<b>Word-Cloud: </b>" + img + "</a>"
 
-
-            /*  layer.bindPopup('Borough:' + feature.properties.neighbourhood + '<p>' + 'Price:' + Math.floor(feature.properties.airbnb_price_price) + 'pounds' + '</p>'),*/
             layer.bindTooltip(popup),
                 layer.on('mouseover', function () {
                     this.setStyle({
-                        color: 'red'   //or whatever style you wish to use;
+                        color: 'red'   //for the boundary line when hover
                     });
                 });
                 layer.on('mouseout', function () {
@@ -304,20 +295,15 @@ $.getJSON(url_sentiment, function (json) {
                 fillOpacity: 0.9
             }
 
-            /*            var popup = 'Borough:' + feature.properties.neighbourhood + '<p>' + 'Price:' + Math.floor(feature.properties.airbnb_price_price) + ' pounds' + '</p>'*/
             var img = '<img src="' + feature.properties.Link + '">';
             var popup = "<b>Location Description: </b>" + feature.properties.neighbourhood + "<br>" +
                 "<b>Avg. Host Subjectivity: </b>" + feature.properties.hostsubjectivity_mean.toFixed(2) + "<br>" +
-                /*                                "<b>Graffiti Type: </b>" + entry[5] + "<br>" +
-                                                "<b>Graffiti Material: </b>" + entry[6] + "<br>" +*/
-                "<b>Word-Cloud: </b><a href='" + 'http://www.google.com' + "' target=\"_blank\">" + img + "</a>"
+                "<b>Word-Cloud: </b>" + img + "</a>"
 
-
-            /*  layer.bindPopup('Borough:' + feature.properties.neighbourhood + '<p>' + 'Price:' + Math.floor(feature.properties.airbnb_price_price) + 'pounds' + '</p>'),*/
             layer.bindTooltip(popup),
             layer.on('mouseover', function () {
                     this.setStyle({
-                        color: 'red'   //or whatever style you wish to use;
+                        color: 'red'   //for the boundary line when hover
                     });
             });
             layer.on('mouseout', function () {
@@ -420,7 +406,6 @@ guest_polarity_legend.onAdd = function (map) {
         grades = [0.165, 0.190, 0.215, 0.240, 0.265, 0.290, 0.315, 0.340, 0.365, 0.390, 0.415],
         labels = ['<strong>Average Polarity Score</strong>'];
 
-    // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
         from = grades[i];
         to = grades[i + 1];
@@ -434,13 +419,14 @@ guest_polarity_legend.onAdd = function (map) {
     return div;
 };
 
+guest_polarity_legend.addTo(map);
+
 host_polarity_legend.onAdd = function (map) {
 
     var div = L.DomUtil.create('div', 'info legend'),
         grades = [0.165, 0.190, 0.215, 0.240, 0.265, 0.290, 0.315, 0.340, 0.365, 0.390, 0.415],
         labels = ['<strong>Average Polarity Score</strong>'];
 
-    // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
         from = grades[i];
         to = grades[i + 1];
@@ -462,7 +448,6 @@ guest_subjectivity_legend.onAdd = function (map) {
         grades = [0.325, 0.350, 0.375, 0.400, 0.425, 0.450, 0.475, 0.500, 0.525, 0.550, 0.575],
         labels = ['<strong>Average Subjectivity Score</strong>'];
 
-    // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
         from = grades[i];
         to = grades[i + 1];
@@ -483,7 +468,6 @@ host_subjectivity_legend.onAdd = function (map) {
         grades = [0.325, 0.350, 0.375, 0.400, 0.425, 0.450, 0.475, 0.500, 0.525, 0.550, 0.575],
         labels = ['<strong>Average Subjectivity Score</strong>'];
 
-    // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
         from = grades[i];
         to = grades[i + 1];
@@ -504,7 +488,7 @@ L.Control.textbox = L.Control.extend({
 
         var text = L.DomUtil.create('div');
         text.id = "info_text";
-        text.innerHTML = "<strong>Hi, We are JAMS</strong>"
+        text.innerHTML = "<strong>JAMS.</strong>"
         return text;
     },
 
