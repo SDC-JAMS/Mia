@@ -1,4 +1,4 @@
-// JavaScript source code
+﻿// JavaScript source code
 
 //  set Leaflet
 var map = L.mapbox.map('mapid')
@@ -8,7 +8,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/miadibe/ckaffoouw0d1y1il9m090hc52/
     maxZoom: 15,
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
         '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-        'Imagery � <a href="http://mapbox.com">Mapbox</a>',
+        'Imagery © <a href="http://mapbox.com">Mapbox</a>',
 
 }).addTo(map);
 
@@ -22,7 +22,7 @@ var heatgeojsonmysql = [];
 
 $.getJSON(url_airbnb, function (data) {
 
-    // convert the json data with point data from mysql to become geoJSON    
+    // convert the point data in json format from mysql to become geoJSON object
     data.forEach(function (point) {
         var lat = point.latitude;
         var lon = point.longitude;
@@ -40,7 +40,7 @@ var heat = L.heatLayer(heatgeojsonmysql, {
     radius: 15,
     blur: 10,
     maxZoom: 17,
-}).addTo(map);
+});
 
 
 // BUBBLE
@@ -51,7 +51,7 @@ var bubblejsonmysql = [];
 
 $.getJSON(url_airbnb_data, function (data) {
 
-    // convert the json data with point data from mysql to become geoJSON
+    // convert the point data in json format from mysql to become geoJSON object
 
     data.forEach(function (point) {
 
@@ -94,6 +94,9 @@ var bubbles_listings = L.bubbleLayer(bubblef, {
 $.getJSON(url_airbnb_data, function (json) {
 
     var price_array = [];
+
+    //  Covert the polygon feautures in WKT string from database to geoJSON object
+    // https://gis.stackexchange.com/questions/162842/convert-wkt-to-geojson-with-leaflet
 
     var wkt = new Wkt.Wkt()
 
@@ -158,6 +161,9 @@ $.getJSON(url_airbnb_data, function (json) {
 
     var rating_array = [];
 
+    //  Covert the polygon feautures in WKT string from database to geoJSON object
+    // https://gis.stackexchange.com/questions/162842/convert-wkt-to-geojson-with-leaflet
+
     var wkt = new Wkt.Wkt()
 
     json.forEach(function (layer) {
@@ -194,7 +200,7 @@ $.getJSON(url_airbnb_data, function (json) {
                 fillOpacity: 0.9
             }
 
-            layer.bindPopup('Borough:' + feature.properties.neighbourhood + '<p>' + 'Rating:' + Math.floor(feature.properties.review_scores_rating) + '</p>'),
+            layer.bindPopup('Borough:' + feature.properties.neighbourhood + '<p>' + 'Rating Score: ' + Math.floor(feature.properties.review_scores_rating) + '</p>'),
 
                 airbnb_review_scores_rating.addLayer(layer)
         },
@@ -213,7 +219,7 @@ $.getJSON(url_airbnb_data, function (json) {
     })
 })
 
-var airbnb_review_scores_rating = L.layerGroup()
+var airbnb_review_scores_rating = L.layerGroup().addTo(map)
 
 // Add Airbnb Clustering Layer
 
@@ -224,7 +230,7 @@ $.getJSON(url_cluster, function (json) {
 
     var cluster_array = [];
 
-    // Convert the wkt geometry from mysql to geoJSON
+    //  Covert the polygon feautures in WKT string from database to geoJSON object
     // https://gis.stackexchange.com/questions/162842/convert-wkt-to-geojson-with-leaflet
 
     var wkt = new Wkt.Wkt()
@@ -255,16 +261,7 @@ $.getJSON(url_cluster, function (json) {
 
         onEachFeature: function (feature, layer) {
 
-            var Initstyle = {
-                fillColor: airbnb_cluster_getColor(feature.properties.cluster_type),
-                weight: 2,
-                opacity: 1,
-                color: 'white',
-                dashArray: '3',
-                fillOpacity: 0.9
-            }
-
-            layer.bindPopup('<p>' + 'Borough:' + feature.properties.neighbourhood + '</p>' + 'Average Room Price: ' + Math.floor(feature.properties.price) + 'pounds'),
+            layer.bindPopup('<p>' + '<strong>Borough:</strong>' + feature.properties.neighbourhood + '</p>' + '<p>' + '<strong>Clustering Group:</strong> ' + feature.properties.cluster_type + '</p>'),
 
                 airbnb_cluster.addLayer(layer)
         },
@@ -288,13 +285,14 @@ var airbnb_cluster = L.layerGroup()
 //Lengend
 
 function airbnb_price_getColor(d) {
-    return d > 220 ? '#000000' :
-           d > 192 ? '#538CC6' :
-           d > 164 ? '#6699CC' :
-           d > 136 ? '#79A6D2' :
-           d > 108 ? '#8CB3D9':
-           d > 80 ? '#B3CCE6' :
-                        '#ECF2F9';
+    return d > 220 ? '#ff5050' :
+           d > 192 ? '#f05757' :
+            d > 164 ? '#e05f5f' :
+           d > 136 ? '#d96262' :
+           d > 108 ? '#c26d6d':
+           d > 80 ? '#ab7878' :
+           d > 50 ? '#759292' :
+                      '';
 }
 
 var airbnb_price_legend = L.control({ position: 'bottomright' });
@@ -302,10 +300,9 @@ var airbnb_price_legend = L.control({ position: 'bottomright' });
 airbnb_price_legend.onAdd = function (map) {
 
     var div = L.DomUtil.create('div', 'info legend'),
-        grades = [80, 108, 136, 164, 192, 220],
-        labels = ['<strong>Average Price</strong>'];
+        grades = [50, 80, 108, 136, 164, 192, 220],
+        labels = ['<strong>Average Room Price</strong>'];
 
-    // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
         from = grades[i];
         to = grades[i + 1];
@@ -320,68 +317,50 @@ airbnb_price_legend.onAdd = function (map) {
 };
 
 function airbnb_review_scores_rating_getColor(d) {
-    return d > 95 ? '#000000' :
-           d > 94 ? '#538CC6' :
-           d > 93 ? '#6699CC' :
-           d > 92 ? '#79A6D2' :
-           d > 91 ? '#8CB3D9':
-           d > 90 ? '#B3CCE6' :
-                        '#ECF2F9';
+    return d > 95 ? '#484b49' :
+        d > 94 ? '#656a68' :
+            d > 93 ? '#838986' :
+                d > 92 ? '#a2a6a4' :
+                    d > 91 ? '#c1c4c2' :
+                        d > 90 ? '#e0e1e1' :
+                            '';
 }
+
 
 var airbnb_review_scores_rating_legend = L.control({ position: 'bottomright' });
 
 airbnb_review_scores_rating_legend.onAdd = function (map) {
 
     var div = L.DomUtil.create('div', 'info legend'),
-        grades = [80, 108, 136, 164, 192, 220],
-        labels = ['<strong>Average Review Rating</strong>'];
+        grades = [90, 91, 92, 93, 94, 95],
+        labels = ['<strong>Average Review Score Rating</strong>'];
 
-    // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
         from = grades[i];
-        to = grades[i + 1];
 
         labels.push(
             '<i style="background:' + airbnb_review_scores_rating_getColor(from + 0.01) + '"></i> ' +
-            from + (to ? '&ndash;' + to + '<br>' : '+'));
+            from + '<br>')
     }
 
     div.innerHTML = labels.join('<br>');
     return div;
 };
+
+airbnb_review_scores_rating_legend.addTo(map);
 
 // Cluster Color
 
 function airbnb_cluster_getColor(d) {
-    return d == 4 ? '#EB6662' :
-           d == 3 ? '#F7B172' :
-           d == 2 ? '#82C881' :
+    return d == 4 ? '#203D85' :
+        d == 3 ? '#F7D37E' :
+            d == 2 ? '#EB6662' :
            d == 1 ? '#1D8F94':
-           d == 0 ? '#203D85' :
+          d == 0 ? '#82C881' :
                     '';
 }
 
 var airbnb_cluster_legend = L.control({ position: 'bottomright' });
-
-airbnb_cluster_legend.onAdd = function (map) {
-
-    var div = L.DomUtil.create('div', 'info legend'),
-        grades = [4, 3, 2, 1, 0],
-        labels = ['<strong>Cluster Group</strong>'];
-
-    // loop through our density intervals and generate a label with a colored square for each interval
-    for (var i = 0; i < grades.length; i++) {
-        from = grades[i];
-
-        labels.push(
-            '<i style="background:' + airbnb_cluster_getColor(from + 1) + '"></i> ' +
-            from );
-    }
-
-    div.innerHTML = labels.join('<br>');
-    return div;
-};
 
 // Text Box
 
@@ -390,7 +369,7 @@ L.Control.textbox = L.Control.extend({
 
         var text = L.DomUtil.create('div');
         text.id = "info_text";
-        text.innerHTML = "<strong>Hi, We are JAMS</strong>"
+        text.innerHTML = "<strong>JAMS.</strong>"
         return text;
     },
 
@@ -404,14 +383,14 @@ L.control.textbox({ position: 'bottomleft' }).addTo(map);
 
 // Info Bar Chart
 
-// Control layer
+// Control layer group
 
 var baseMaps = {
+    "Avg. Review Rating": airbnb_review_scores_rating,
+    "Avg. Room Price": airbnb_price,
     "Location Heat Map": heat,
     "Number of Listings": bubbles_listings,
-    "Avg. Room Price": airbnb_price,
-    "Avg. Review Rating": airbnb_review_scores_rating,
-    "Cluster by Rating Categories and Price": airbnb_cluster
+    "Clustering by Geodemographic Classification": airbnb_cluster
 
 };
 
@@ -424,23 +403,18 @@ map.on('baselayerchange', function (eventLayer) {
 
     if (eventLayer.name === 'Avg. Room Price') {
         this.removeControl(airbnb_review_scores_rating_legend);
-        this.removeControl(airbnb_cluster_legend);
         airbnb_price_legend.addTo(this);
     } else if (eventLayer.name === 'Avg. Review Rating') {
         this.removeControl(airbnb_price_legend);
-        this.removeControl(airbnb_cluster_legend);
         airbnb_review_scores_rating_legend.addTo(this);
     } else if (eventLayer.name === 'Location Heat Map') {
         this.removeControl(airbnb_price_legend);
-        this.removeControl(airbnb_cluster_legend);
         this.removeControl(airbnb_review_scores_rating_legend);
     } else if (eventLayer.name === 'Number of Listings') {
         this.removeControl(airbnb_price_legend);
-        this.removeControl(airbnb_cluster_legend);
         this.removeControl(airbnb_review_scores_rating_legend);
-    } else if (eventLayer.name === 'Cluster by Rating Categories and Price') {
+    } else if (eventLayer.name === 'Clustering by Geodemographic Classification') {
         this.removeControl(airbnb_price_legend);
-        this.removeControl(airbnb_cluster_legend);
         this.removeControl(airbnb_review_scores_rating_legend);
         airbnb_cluster_legend.addTo(this);
     }
