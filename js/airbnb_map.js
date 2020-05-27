@@ -352,11 +352,11 @@ airbnb_review_scores_rating_legend.addTo(map);
 // Cluster Color
 
 function airbnb_cluster_getColor(d) {
-    return d == 4 ? '#203D85' :
-        d == 3 ? '#F7D37E' :
-            d == 2 ? '#EB6662' :
-           d == 1 ? '#1D8F94':
-          d == 0 ? '#82C881' :
+    return d == 4 ? '#c6ecc6' :
+        d == 3 ? '#d6d6c2' :
+            d == 2 ? '#ffe6e6' :
+           d == 1 ? '#d1d1e0':
+          d == 0 ? '#c2d6d6' :
                     '';
 }
 
